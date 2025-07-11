@@ -17,6 +17,9 @@ export default defineConfig({
                 },
             },
         }),
+        Components({
+            resolvers: [PrimeVueResolver()],
+        }),
     ],
     resolve: {
         alias: {
