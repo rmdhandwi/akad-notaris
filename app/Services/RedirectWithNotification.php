@@ -4,7 +4,7 @@ namespace App\Services;
 
 class RedirectWithNotification
 {
-    public static function flash(bool $action, string $successMessage, string $errorMessage, int $duration)
+    public static function flash(bool $action, string $successMessage, string $errorMessage, int $duration = 3000)
     {
         return redirect()->back()->with([
             'notif_status' => $action ? 'success' : 'error',
