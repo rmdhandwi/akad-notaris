@@ -21,7 +21,7 @@ const page = usePage()
 
 const { showToast } = useNotification()
 
-watch(() => page.props.flash, (newNotification) => {
+watch(() => page.props.flash.status, (newNotification) => {
   if (newNotification) {
     showToast(newNotification.notif_message, newNotification.notif_status, newNotification.notif_duration)
   }
