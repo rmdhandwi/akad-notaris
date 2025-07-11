@@ -10,7 +10,7 @@ import { useNotification } from '@/Composables/useNotification'
 onMounted(() =>
 {
     // catch notification data
-    const notification = page.props.flash
+    const notification = page.props.flash.status
     if (notification) {
         showToast(notification.notif_message, notification.notif_status, notification.notif_duration)
     }
