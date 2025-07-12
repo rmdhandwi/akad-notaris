@@ -48,8 +48,8 @@ class User extends Authenticatable
     }
 
     // define table relationship
-    public function roles()
+    public function role()
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
 }
