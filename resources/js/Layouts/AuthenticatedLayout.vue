@@ -41,17 +41,17 @@ watch(() => page.props.flash.status, (newNotification) => {
         <!-- #sidebar -->
         <Sidebar/>
 
-        <div class="transition-all duration-[450ms] w-full h-full px-1 overflow-hidden">
+        <div class="w-full h-full px-1 overflow-hidden">
             <!-- #page content -->
-            <div class="transition-all duration-[450ms] w-full h-full px-1 overflow-hidden">
+            <div class="ml-[180px] h-full flex flex-col gap-2 px-1 overflow-hidden">
                 <!-- #header -->
-                <div  class="bg-slate-50 rounded-lg w-full flex justify-between items-center gap-x-2 py-2 px-4 shadow-lg z-10">
+                <div  class="bg-slate-50 rounded-lg flex justify-between items-center gap-x-2 py-2 px-4 shadow-lg z-10">
                     <h1 class="text-[1.3rem] uppercase">
                         {{ props.pageTitle }}
                     </h1>
                 </div>
                 <!-- #body -->
-                <div class="bg-slate-50 rounded-lg w-full p-4 min-h-screen">
+                <div class="bg-slate-50 rounded-lg p-4 min-h-screen">
                     <slot name="pageContent"/>
                 </div>
                 <!-- body selesai -->
