@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\RedirectWithNotification;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,14 @@ class RoleNameMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // $user = auth()->user();
-        $user = auth()->guard()->user();
+        $user = auth()->user();
 
-        if (!$user || !$user->roles || !in_array(strtolower($user->roles->name), $roles)) {
-            abort(403, 'Akses tidak diizinkan.');
+        if (!$user || !$user->role || !in_array(strtolower($user->role->role_name), $roles)) {
+            return RedirectWithNotification::back(
+                false,
+                '',
+                'Anda tidak memiliki izin untuk mengakses halaman ini.'
+            );
         }
 
         return $next($request);
