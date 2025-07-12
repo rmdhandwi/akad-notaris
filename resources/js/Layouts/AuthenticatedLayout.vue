@@ -13,8 +13,8 @@ import Sidebar from '@/Components/Sidebar.vue'
 onMounted(() =>
 {
     // catch notification data
-    const notification = page.props.flash.status
-    if (notification) {
+    const notification = page.props.flash
+    if (notification.notif_status) {
         showToast(notification.notif_message, notification.notif_status, notification.notif_duration)
     }
 })
@@ -28,7 +28,7 @@ const page = usePage()
 
 const { showToast } = useNotification()
 
-watch(() => page.props.flash.status, (newNotification) => {
+watch(() => page.props.flash, (newNotification) => {
   if (newNotification) {
     showToast(newNotification.notif_message, newNotification.notif_status, newNotification.notif_duration)
   }
@@ -36,6 +36,7 @@ watch(() => page.props.flash.status, (newNotification) => {
 </script>
 
 <template>
+    <Toast position="bottom-right" group="br"/>
     <!-- #main layout -->
     <div class="bg-slate-200 flex p-1 min-h-screen overflow-hidden">
         <!-- #sidebar -->
