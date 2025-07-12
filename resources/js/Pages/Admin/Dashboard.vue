@@ -1,7 +1,20 @@
 <script setup>
+// import core api
+import { Head } from '@inertiajs/vue3'
+
+// import layouts
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+
+// variables, functions
+const pageTitle = 'Dashboard'
+
 </script>
 
 <template>
-    <div>
-    </div>
+    <Head :title="pageTitle"/>
+    <AuthenticatedLayout>
+        <template #pageContent>
+            <span class="text-2xl">Hello Admin</span>
+        </template>
+    </AuthenticatedLayout>
 </template>
