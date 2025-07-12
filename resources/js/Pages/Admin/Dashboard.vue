@@ -12,7 +12,7 @@ const pageTitle = 'Dashboard'
 
 <template>
     <Head :title="pageTitle"/>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :pageTitle="pageTitle">
         <template #pageContent>
             <span class="text-2xl">Hello Admin</span>
         </template>
