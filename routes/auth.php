@@ -12,6 +12,6 @@ Route::middleware('guest')->group(function () {
 
 });
 
-Route::middleware('auth', 'roleName:admin')->group(function () {
+Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
