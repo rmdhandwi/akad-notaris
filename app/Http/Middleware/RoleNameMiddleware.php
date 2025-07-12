@@ -13,8 +13,15 @@ class RoleNameMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
+        // $user = auth()->user();
+        $user = auth()->guard()->user();
+
+        if (!$user || !$user->roles || !in_array(strtolower($user->roles->name), $roles)) {
+            abort(403, 'Akses tidak diizinkan.');
+        }
+
         return $next($request);
     }
 }
