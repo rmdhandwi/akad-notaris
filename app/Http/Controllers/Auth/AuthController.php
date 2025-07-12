@@ -36,7 +36,7 @@ class AuthController extends Controller
             'admin' => RedirectWithNotification::toNamedRoute(
                 'admin.dashboard',
                 true,
-                'Berhasil login sebagai admin.',
+                'Selamat Datang '.$user->username,
                 '',
                 3000
             ),
@@ -44,7 +44,7 @@ class AuthController extends Controller
             'staf' => RedirectWithNotification::toNamedRoute(
                 'staf.dashboard',
                 true,
-                'Berhasil login sebagai staf.',
+                'Selamat Datang '.$user->username,
                 '',
                 3000
             ),
@@ -52,14 +52,14 @@ class AuthController extends Controller
             'notaris' => RedirectWithNotification::toNamedRoute(
                 'notaris.dashboard',
                 true,
-                'Berhasil login sebagai notaris.',
+                'Selamat Datang '.$user->username,
                 '',
                 3000
             ),
             'klien' => RedirectWithNotification::toNamedRoute(
                 'klien.dashboard',
                 true,
-                'Berhasil login sebagai klien.',
+                'Selamat Datang '.$user->username,
                 '',
                 3000
             ),
@@ -72,20 +72,14 @@ class AuthController extends Controller
                 4000
             ),
         };
-
-        // return RedirectWithNotification::back(
-        //     true,
-        //     'Berhasil Login',
-        //     'Gagal login',
-        // );
     }
 
     public function logout(): RedirectResponse
     {
         $this->authService->logout();
 
-        // return redirect()->route('login')->with('message', 'Logout berhasil.');
-        return RedirectWithNotification::back(
+        return RedirectWithNotification::toNamedRoute(
+            'user.locale_get_all_variants',
             true,
             'Berhasil logout',
             'Gagal logout',
