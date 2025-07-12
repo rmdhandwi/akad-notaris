@@ -30,11 +30,54 @@ class AuthController extends Controller
 
         $this->authService->login($validated);
 
-        return RedirectWithNotification::flash(
-            true,
-            'Berhasil Login',
-            'Gagal login',
-        );
+        $user = auth()->user();
+
+        return match (strtolower($user->role->role_name) ?? null) {
+            'admin' => RedirectWithNotification::toNamedRoute(
+                'admin.dashboard',
+                true,
+                'Berhasil login sebagai admin.',
+                '',
+                3000
+            ),
+
+            'staf' => RedirectWithNotification::toNamedRoute(
+                'staf.dashboard',
+                true,
+                'Berhasil login sebagai staf.',
+                '',
+                3000
+            ),
+
+            'notaris' => RedirectWithNotification::toNamedRoute(
+                'notaris.dashboard',
+                true,
+                'Berhasil login sebagai notaris.',
+                '',
+                3000
+            ),
+            'klien' => RedirectWithNotification::toNamedRoute(
+                'klien.dashboard',
+                true,
+                'Berhasil login sebagai klien.',
+                '',
+                3000
+            ),
+
+            default => RedirectWithNotification::toNamedRoute(
+                'user.login.index',
+                false,
+                '',
+                'Role tidak dikenali.',
+                4000
+            ),
+        };
+
+        // return RedirectWithNotification::back(
+        //     true,
+        //     'Berhasil Login',
+        //     'Gagal login',
+        // );
     }
 
     public function logout(): RedirectResponse
@@ -42,7 +85,7 @@ class AuthController extends Controller
         $this->authService->logout();
 
         // return redirect()->route('login')->with('message', 'Logout berhasil.');
-        return RedirectWithNotification::flash(
+        return RedirectWithNotification::back(
             true,
             'Berhasil logout',
             'Gagal logout',
