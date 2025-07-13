@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('data_jadwal', function (Blueprint $table) {
             $table->id('id_jadwal');
-            $table->foreignId('id_notaris')->nullable()->constrained('notaris_details','id_notaris')->nullOnDelete();
+            $table->foreignId('notaris_id')->nullable()->constrained('notaris_details','notaris_id')->nullOnDelete();
             $table->date('tanggal');
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');
