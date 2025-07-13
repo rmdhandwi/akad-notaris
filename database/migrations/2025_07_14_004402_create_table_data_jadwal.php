@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_data_jadwal', function (Blueprint $table) {
-            $table->id();
+        Schema::create('data_jadwal', function (Blueprint $table) {
+            $table->id('id_jadwal');
+            $table->foreignId('id_notaris')->nullable()->constrained('notaris_details','id_notaris')->nullOnDelete();
+            $table->date('tanggal');
+            $table->time('waktu_mulai');
+            $table->time('waktu_selesai');
+            $table->text('alasan');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_data_jadwal');
+        Schema::dropIfExists('data_jadwal');
     }
 };
