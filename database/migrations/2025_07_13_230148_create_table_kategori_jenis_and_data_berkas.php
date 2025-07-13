@@ -11,8 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_kategori_jenis_and_data_berkas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('kategori_layanan', function (Blueprint $table) {
+            $table->id('id_kategori');
+            $table->string('nama_kategori');
+            $table->text('deskripsi_kategori');
+            $table->timestamps();
+        });
+        Schema::create('jenis_layanan', function (Blueprint $table) {
+            $table->id('id_jenis');
+            $table->foreignId('id_kategori')->nullable()->constrained('kategori_layanan','id_kategori')->nullOnDelete();
+            $table->string('nama_jenis');
+            $table->text('deskripsi_jenis');
+            $table->timestamps();
+        });
+        Schema::create('data_berkas', function (Blueprint $table) {
+            $table->id('id_berkas');
+            $table->foreignId('id_jenis')->nullable()->constrained('jenis_layanan','id_jenis')->nullOnDelete();
+            $table->string('nama_berkas');
             $table->timestamps();
         });
     }
