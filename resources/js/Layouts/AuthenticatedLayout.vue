@@ -37,6 +37,9 @@ watch(() => page.props.flash, (newNotification) => {
 
 <template>
     <Toast position="bottom-right" group="br"/>
+
+    <ConfirmDialog />
+
     <Head :title="props.pageTitle"/>
 
     <!-- #main layout -->
