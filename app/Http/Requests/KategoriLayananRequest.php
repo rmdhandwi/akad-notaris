@@ -3,26 +3,52 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class KategoriLayananRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function attributes(): array
     {
         return [
-            //
+            'nama_kategori' => 'Nama kategori',
+            'deskripsi_kategori' => 'Deskripsi kategori',
+        ];
+    }
+
+    public function rules(): array
+    {
+        $id_kategori = $this->input('id_kategori');
+
+        $isUpdate = !empty($id_kategori);
+
+        return [
+            'nama_kategori' => [
+                'required',
+                'string',
+                $isUpdate ?
+                    Rule::unique('kategori_layanan', 'nama_kategori')->ignore($id_kategori) :
+                    Rule::unique('kategori_layanan', 'nama_kategori'),
+            ],
+            'deskripsi_kategori' => [
+                'required',
+                'string',
+                $isUpdate ?
+                    Rule::unique('kategori_layanan', 'deskripsi_kategori')->ignore($id_kategori) :
+                    Rule::unique('kategori_layanan', 'deskripsi_kategori'),
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            '*.required' => ':attribute wajib diisi.',
+            '*.unique'   => ':attribute sudah terdaftar.',
         ];
     }
 }
