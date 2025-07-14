@@ -11,7 +11,6 @@ class DataBerkas extends Model
 
     protected $table = 'data_berkas';
     protected $primaryKey = 'id_berkas';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_jenis',
