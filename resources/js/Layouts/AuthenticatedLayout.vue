@@ -29,7 +29,7 @@ const page = usePage()
 const { showToast } = useNotification()
 
 watch(() => page.props.flash, (newNotification) => {
-  if (newNotification) {
+  if (newNotification.notif_status) {
     showToast(newNotification.notif_message, newNotification.notif_status, newNotification.notif_duration)
   }
 })
@@ -38,7 +38,7 @@ watch(() => page.props.flash, (newNotification) => {
 <template>
     <Toast position="bottom-right" group="br"/>
 
-    <ConfirmDialog />
+    <ConfirmDialog class="min-w-[24rem]" />
 
     <Head :title="props.pageTitle"/>
 
