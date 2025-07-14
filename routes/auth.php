@@ -23,4 +23,5 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/admin/layanan/kategori', [KategoriLayananController::class, 'index'])->name('admin.layanan.kategori.index');
+    Route::post('/admin/layanan/kategori/store', [KategoriLayananController::class, 'store'])->name('admin.layanan.kategori.store');
 });
