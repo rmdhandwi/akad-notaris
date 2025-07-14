@@ -1,7 +1,7 @@
 <script setup>
 // import core api
 import { onMounted, watch } from 'vue'
-import { usePage } from '@inertiajs/vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 
 // import composables/stores
 import { useNotification } from '@/Composables/useNotification'
@@ -37,6 +37,8 @@ watch(() => page.props.flash, (newNotification) => {
 
 <template>
     <Toast position="bottom-right" group="br"/>
+    <Head :title="props.pageTitle"/>
+
     <!-- #main layout -->
     <div class="bg-slate-200 flex p-1 min-h-screen overflow-hidden">
         <!-- #sidebar -->
