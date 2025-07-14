@@ -11,7 +11,6 @@ class JenisLayanan extends Model
 
     protected $table = 'jenis_layanan';
     protected $primaryKey = 'id_jenis';
-    public $timestamps = false;
 
     protected $fillable = [
         'id_kategori',
