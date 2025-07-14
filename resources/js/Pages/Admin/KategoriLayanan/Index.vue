@@ -20,6 +20,7 @@ const pageTitle = ref('Kategori Layanan')
 
 const currentTab = ref('List')
 
+const editDataId = ref(null)
 
 const switchComponents = (component,title) =>
 {
@@ -50,6 +51,10 @@ const componentProps = computed(() => {
             data: props.data?.map((p, i) => ({ nomor: i + 1, ...p })),
         };
 
+        case 'Form' :
+            if(editDataId.value) return { data : props.data?.find(data => data.id_kategori === editDataId.value) }
+            return {}
+        ;
         default:
         return {};
     }
