@@ -21,6 +21,16 @@ class AuthController extends Controller
     // return login page
     public function index()
     {
+        if(auth()->check())
+        {
+            return RedirectWithNotification::back(
+                false,
+                '',
+                'Logout hanya melalui tombol logout',
+                5000
+            );
+        }
+        
         return Inertia::render('Auth/Login');
     }
 
@@ -79,10 +89,10 @@ class AuthController extends Controller
         $this->authService->logout();
 
         return RedirectWithNotification::toNamedRoute(
-            'user.locale_get_all_variants',
+            'user.login.index',
             true,
             'Berhasil logout',
-            'Gagal logout',
+            '',
         );
     }
 }
