@@ -11,7 +11,6 @@ class KategoriLayanan extends Model
 
     protected $table = 'kategori_layanan';
     protected $primaryKey = 'id_kategori';
-    public $timestamps = false;
 
     protected $fillable = [
         'nama_kategori',
