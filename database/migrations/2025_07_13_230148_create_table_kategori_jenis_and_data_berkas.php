@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('kategori_layanan', function (Blueprint $table) {
             $table->id('id_kategori');
-            $table->string('nama_kategori');
+            $table->string('nama_kategori')->unique();
             $table->text('deskripsi_kategori');
             $table->timestamps();
         });
         Schema::create('jenis_layanan', function (Blueprint $table) {
             $table->id('id_jenis');
             $table->foreignId('id_kategori')->nullable()->constrained('kategori_layanan','id_kategori')->nullOnDelete();
-            $table->string('nama_jenis');
+            $table->string('nama_jenis')->unique();
             $table->text('deskripsi_jenis');
             $table->timestamps();
         });
