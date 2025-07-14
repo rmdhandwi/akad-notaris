@@ -35,7 +35,7 @@ class KategoriLayananRequest extends FormRequest
                     Rule::unique('kategori_layanan', 'nama_kategori'),
             ],
             'deskripsi_kategori' => [
-                'required',
+                'nullable',
                 'string',
                 $isUpdate ?
                     Rule::unique('kategori_layanan', 'deskripsi_kategori')->ignore($id_kategori) :
