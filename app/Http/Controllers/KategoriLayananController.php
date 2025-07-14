@@ -10,7 +10,7 @@ class KategoriLayananController extends Controller
 {
     public function index()
     {
-        $data = KategoriLayanan::select('id_kategori','nama_kategori','deksripsi_kategori')->get();
+        $data = KategoriLayanan::select('id_kategori','nama_kategori','deskripsi_kategori')->get();
 
         return Inertia::render('Admin/KategoriLayanan/Index',[
             'data' => $data,
