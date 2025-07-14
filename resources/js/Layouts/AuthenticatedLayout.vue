@@ -44,7 +44,7 @@ watch(() => page.props.flash, (newNotification) => {
 
         <div class="w-full h-full px-1 overflow-hidden">
             <!-- #page content -->
-            <div class="ml-[180px] h-full flex flex-col gap-2 px-1 overflow-hidden">
+            <div class="ml-[200px] h-full flex flex-col gap-2 px-1 overflow-hidden">
                 <!-- #header -->
                 <div  class="bg-slate-50 rounded-lg flex justify-between items-center gap-x-2 py-2 px-4 shadow-lg z-10">
                     <h1 class="text-[1.3rem] uppercase">
