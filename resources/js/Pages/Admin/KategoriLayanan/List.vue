@@ -50,12 +50,18 @@ const dataClone = ref([])
             <template #empty>
                 <span class="flex justify-center">Tidak Ada Kategori</span>
             </template>
-            <Column header="No" field="no"/>
+            <Column header="No" field="nomor"/>
             <Column header="Nama" field="nama_kategori"/>
-            <Column header="Deskripsi" field="deskripsi_kategori"/>
-            <Column header="Action" frozen align-frozen="right">
+            <Column header="Deskripsi" field="deskripsi_kategori">
                 <template #body="{data}">
-                    <div class="flex place-content-center gap-2">
+                    <span :class="{'text-gray-400' : !data.deskripsi_kategori}">
+                        {{ data.deskripsi_kategori ? data.deskripsi_kategori : 'Tidak ada deskripsi' }}
+                    </span>
+                </template>
+            </Column>
+            <Column header="Action" frozen align-frozen="right" class="w-1 whitespace-nowrap">
+                <template #body="{data}">
+                    <div class="flex items-center gap-2">
                         <Button severity="info" size="small" icon="pi pi-pen-to-square"/>
                         <Button severity="danger" size="small" icon="pi pi-trash"/>
                     </div>
