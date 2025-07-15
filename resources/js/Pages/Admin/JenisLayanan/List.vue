@@ -42,7 +42,7 @@ const editData = dataId =>
                             <InputIcon>
                                 <i class="pi pi-search me-4" />
                             </InputIcon>
-                            <InputText v-model="filters['global'].value" placeholder="Cari Kategori" size="small" fluid/>
+                            <InputText v-model="filters['global'].value" placeholder="Cari Jenis Layanan" size="small" fluid/>
                         </IconField>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ const editData = dataId =>
                 <span class="flex justify-center">Tidak Ada Jenis Layanan</span>
             </template>
             <Column header="No" field="nomor"/>
-            <Column header="Kategori Layanan" field="kategori_layanan.nama_kategori"/>
+            <Column header="Kategori" field="kategori_layanan.nama_kategori"/>
             <Column header="Nama" field="nama_jenis"/>
             <Column header="Deskripsi" field="deskripsi_jenis">
                 <template #body="{data}">
