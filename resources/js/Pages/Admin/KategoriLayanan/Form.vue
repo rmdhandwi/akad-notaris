@@ -1,11 +1,17 @@
 <script setup>
 // import core api
-import { watch } from 'vue'
+import { onUnmounted, watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { useConfirm } from 'primevue'
 
 // import store / composables
 import { useNotification } from '@/Composables/useNotification'
+
+// lifecycle hooks
+onUnmounted(() =>
+{
+    form.reset()
+})
 
 // variables, functions
 const props = defineProps({
@@ -27,6 +33,7 @@ const form = useForm({
 const submit = () =>
 {
     const Action = props.data ? 'Update' : 'Simpan'
+    const actionRoute = props.data ? 'update' : 'store'
     confirm.require({
         message: `${Action} Kategori ${form.nama_kategori ?? ''}?`,
         header: 'Peringatan',
@@ -40,9 +47,7 @@ const submit = () =>
             label: `${Action}`,
         },
         accept: () => {
-            if(props.data)
-            {
-                form.post(route('admin.layanan.kategori.update'), {
+            form.post(route(`admin.layanan.kategori.${actionRoute}`), {
                     onError : () => {
                         showToast(
                             'Terjadi kesalahan',
@@ -55,23 +60,43 @@ const submit = () =>
                         form.clearErrors()
                         emit('refreshPage')
                     }
-                })
-            }
-
-            form.post(route('admin.layanan.kategori.store'), {
-                onError : () => {
-                    showToast(
-                        'Terjadi kesalahan',
-                        'error',
-                        5000,
-                    )
-                },
-                onSuccess : () => {
-                    form.reset()
-                    form.clearErrors()
-                    emit('refreshPage')
-                }
             })
+            // if(props.data)
+            // {
+            //     console.log(props.data);
+            //     console.log(form);
+            //     form.post(route('admin.layanan.kategori.update'), {
+            //         onError : () => {
+            //             showToast(
+            //                 'Terjadi kesalahan',
+            //                 'error',
+            //                 5000,
+            //             )
+            //         },
+            //         onSuccess : () => {
+            //             form.reset()
+            //             form.clearErrors()
+            //             emit('refreshPage')
+            //         }
+            //     })
+            // }
+            // else
+            // {
+            //     form.post(route('admin.layanan.kategori.store'), {
+            //         onError : () => {
+            //             showToast(
+            //                 'Terjadi kesalahan',
+            //                 'error',
+            //                 5000,
+            //             )
+            //         },
+            //         onSuccess : () => {
+            //             form.reset()
+            //             form.clearErrors()
+            //             emit('refreshPage')
+            //         }
+            //     })
+            // }
         },
     })
 }
