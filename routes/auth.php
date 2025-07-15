@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,9 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::post('/admin/layanan/kategori/store', [KategoriLayananController::class, 'store'])->name('admin.layanan.kategori.store');
     Route::post('/admin/layanan/kategori/update', [KategoriLayananController::class, 'update'])->name('admin.layanan.kategori.update');
     Route::post('/admin/layanan/kategori/delete', [KategoriLayananController::class, 'delete'])->name('admin.layanan.kategori.delete');
+
+    Route::get('/admin/layanan/jenis', [JenisLayananController::class, 'index'])->name('admin.layanan.jenis.index');
+    Route::post('/admin/layanan/jenis/store', [JenisLayananController::class, 'store'])->name('admin.layanan.jenis.store');
+    Route::post('/admin/layanan/jenis/update', [JenisLayananController::class, 'update'])->name('admin.layanan.jenis.update');
+    Route::post('/admin/layanan/jenis/delete', [JenisLayananController::class, 'delete'])->name('admin.layanan.jenis.delete');
 });
