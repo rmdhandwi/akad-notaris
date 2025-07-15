@@ -15,13 +15,18 @@ const props = defineProps({
     data : Object
 })
 
-const emit = defineEmits(['refreshPage'])
+const emit = defineEmits(['refreshPage', 'editData'])
 
 const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 })
 
 const dataClone = ref([])
+
+const editData = dataId =>
+{
+    emit('editData', dataId)
+}
 </script>
 
 <template>
@@ -62,7 +67,7 @@ const dataClone = ref([])
             <Column header="Action" frozen align-frozen="right" class="w-1 whitespace-nowrap">
                 <template #body="{data}">
                     <div class="flex items-center gap-2">
-                        <Button severity="info" size="small" icon="pi pi-pen-to-square"/>
+                        <Button @click="editData(data.id_kategori)" severity="info" size="small" icon="pi pi-pen-to-square"/>
                         <Button severity="danger" size="small" icon="pi pi-trash"/>
                     </div>
                 </template>
