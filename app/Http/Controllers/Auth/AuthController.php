@@ -30,7 +30,7 @@ class AuthController extends Controller
                 5000
             );
         }
-        
+
         return Inertia::render('Auth/Login');
     }
 
@@ -89,7 +89,7 @@ class AuthController extends Controller
         $this->authService->logout();
 
         return RedirectWithNotification::toNamedRoute(
-            'user.login.index',
+            'login',
             true,
             'Berhasil logout',
             '',
