@@ -39,4 +39,28 @@ class KategoriLayananController extends Controller
             'Gagal menambahkan '.$req['nama_kategori'],
         );
     }
+
+    public function update(KategoriLayananRequest $req)
+    {
+        $data = $req->validated();
+
+        $update = $this->repository->update($req['id_kategori'], $data);
+
+        return RedirectWithNotification::back(
+            $update,
+            'Berhasil update ' . $req['nama_kategori'],
+            'Gagal update ' . $req['nama_kategori'],
+        );
+    }
+
+    public function delete(KategoriLayananRequest $req)
+    {
+        $delete = $this->repository->delete($req['id_kategori']);
+
+        return RedirectWithNotification::back(
+            $delete,
+            'Berhasil hapus ' . $req['nama_kategori'],
+            'Gagal hapus ' . $req['nama_kategori'],
+        );
+    }
 }
