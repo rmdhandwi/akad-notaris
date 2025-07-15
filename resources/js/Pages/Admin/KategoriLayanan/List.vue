@@ -68,7 +68,6 @@ const editData = dataId =>
                 <template #body="{data}">
                     <div class="flex items-center gap-2">
                         <Button @click="editData(data.id_kategori)" severity="info" size="small" icon="pi pi-pen-to-square"/>
-                        <Button severity="danger" size="small" icon="pi pi-trash"/>
                     </div>
                 </template>
             </Column>
