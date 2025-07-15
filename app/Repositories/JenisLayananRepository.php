@@ -12,6 +12,18 @@ class JenisLayananRepository implements JenisLayananRepositoryInterface
         $store = JenisLayanan::create($data);
         return (bool) $store;
     }
-    public function update($id, array $data) {}
-    public function delete($id) {}
+    
+    public function update($id, array $data)
+    {
+        $getData = JenisLayanan::findOrFail($id);
+
+        return $getData->update($data);
+    }
+
+    public function delete($id)
+    {
+        $getData = JenisLayanan::findOrFail($id);
+
+        return $getData->delete();
+    }
 }
