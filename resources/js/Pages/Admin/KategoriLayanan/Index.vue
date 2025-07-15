@@ -96,6 +96,7 @@ const cancelEdit = () =>
 
 const refreshPage = () =>
 {
+    editDataId.value = null
     switchComponents('List','Daftar Kategori')
 }
 
