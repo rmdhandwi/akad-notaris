@@ -4,7 +4,6 @@ import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useConfirm } from 'primevue'
 
 // import store / composables
-import { useNotification } from '@/Composables/useNotification'
 
 // import layout, components
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
@@ -14,12 +13,11 @@ import LoadingSpinner from '@/Components/LoadingSpinner.vue'
 
 // variables, functions
 const props = defineProps({
-    data : Object
+    dataKtg : Object,
+    dataJenis : Object
 })
 
-const { showToast } = useNotification()
-
-const pageTitle = ref('Kategori Layanan')
+const pageTitle = ref('Jenis Layanan')
 
 const currentTab = ref('List')
 
@@ -53,15 +51,21 @@ const componentProps = computed(() => {
 
         case 'List':
         return {
-            data: props.data?.map((p, i) => ({ nomor: i + 1, ...p })),
+            dataJenis : props.dataJenis?.map((p, i) => ({ nomor: i + 1, ...p })),
+            dataKtg : props.dataKtg
         };
 
         case 'Form' :
             if(editDataId.value) {
-                return { data : props.data?.find(data => data.id_kategori === editDataId.value) }
+                return {
+                    dataJenis : props.dataJenis?.find(data => data.id_kategori === editDataId.value),
+                    dataKtg : props.dataKtg
+                }
             }
-            return {}
-        ;
+            else {
+                return { dataKtg : props.dataKtg
+                }
+            };
         default:
         return {};
     }
@@ -89,7 +93,7 @@ const cancelEdit = () =>
         },
         accept: () => {
             editDataId.value = null
-            switchComponents('List','Daftar Kategori')
+            switchComponents('List','Daftar Jenis Layanan')
         }
     })
 }
@@ -97,13 +101,13 @@ const cancelEdit = () =>
 const refreshPage = () =>
 {
     editDataId.value = null
-    switchComponents('List','Daftar Kategori')
+    switchComponents('List','Daftar Jenis Layanan')
 }
 
 // reactivity
 watch(() => editDataId.value, () => {
     if(editDataId.value) {
-        switchComponents('Form', 'Edit Kategori')
+        switchComponents('Form', 'Edit Jenis Layanan')
     }
 })
 </script>
@@ -113,9 +117,9 @@ watch(() => editDataId.value, () => {
         <template #pageContent>
             <!-- tabs -->
             <div class="flex gap-x-4">
-                <Button @click="switchComponents('List','Daftar Kategori')" label="Daftar Kategori" :severity="currentTab==='List'?'primary':'secondary'" icon="pi pi-list" v-if="currentTab==='List'"/>
+                <Button @click="switchComponents('List','Daftar Jenis Layanan')" label="Daftar Jenis Layanan" :severity="currentTab==='List'?'primary':'secondary'" icon="pi pi-list" v-if="currentTab==='List'"/>
                 <Button @click="cancelEdit()" label="Kembali" severity="secondary" icon="pi pi-arrow-left" v-else/>
-                <Button @click="switchComponents('Form','Tambah Kategori')" label="Form Kategori" :severity="currentTab==='List'?'secondary':'primary'" icon="pi pi-plus"/>
+                <Button @click="switchComponents('Form','Tambah Jenis Layanan')" label="Form Jenis Layanan" :severity="currentTab==='List'?'secondary':'primary'" icon="pi pi-plus"/>
             </div>
             <!-- components -->
             <div class="flex flex-col mt-4">
