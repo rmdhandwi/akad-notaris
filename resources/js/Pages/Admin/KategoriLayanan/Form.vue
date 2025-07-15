@@ -1,6 +1,6 @@
 <script setup>
 // import core api
-import { onUnmounted, watch } from 'vue'
+import { watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { useConfirm } from 'primevue'
 
@@ -8,10 +8,6 @@ import { useConfirm } from 'primevue'
 import { useNotification } from '@/Composables/useNotification'
 
 // lifecycle hooks
-onUnmounted(() =>
-{
-    form.reset()
-})
 
 // variables, functions
 const props = defineProps({
@@ -30,10 +26,8 @@ const form = useForm({
     deskripsi_kategori : null,
 })
 
-const submit = () =>
+const submit = (Action, actionRoute) =>
 {
-    const Action = props.data ? 'Update' : 'Simpan'
-    const actionRoute = props.data ? 'update' : 'store'
     confirm.require({
         message: `${Action} Kategori ${form.nama_kategori ?? ''}?`,
         header: 'Peringatan',
@@ -45,6 +39,7 @@ const submit = () =>
         },
         acceptProps: {
             label: `${Action}`,
+            severity : actionRoute === 'delete' ? 'danger' : 'primary'
         },
         accept: () => {
             form.post(route(`admin.layanan.kategori.${actionRoute}`), {
@@ -61,42 +56,6 @@ const submit = () =>
                         emit('refreshPage')
                     }
             })
-            // if(props.data)
-            // {
-            //     console.log(props.data);
-            //     console.log(form);
-            //     form.post(route('admin.layanan.kategori.update'), {
-            //         onError : () => {
-            //             showToast(
-            //                 'Terjadi kesalahan',
-            //                 'error',
-            //                 5000,
-            //             )
-            //         },
-            //         onSuccess : () => {
-            //             form.reset()
-            //             form.clearErrors()
-            //             emit('refreshPage')
-            //         }
-            //     })
-            // }
-            // else
-            // {
-            //     form.post(route('admin.layanan.kategori.store'), {
-            //         onError : () => {
-            //             showToast(
-            //                 'Terjadi kesalahan',
-            //                 'error',
-            //                 5000,
-            //             )
-            //         },
-            //         onSuccess : () => {
-            //             form.reset()
-            //             form.clearErrors()
-            //             emit('refreshPage')
-            //         }
-            //     })
-            // }
         },
     })
 }
@@ -130,7 +89,8 @@ watch(() => props.data, (newData) => {
             <span class="text-red-500" v-if="form.errors.deskripsi_kategori"> {{ form.errors.deskripsi_kategori }} </span>
         </div>
 
-        <Button @click="submit()" :label="props.data ? 'Update' : 'Simpan'" :disabled="form.processing"/>
+        <Button @click="submit(props.data ? 'Update' : 'Simpan', props.data ? 'update' : 'store')" :label="props.data ? 'Update' : 'Simpan'" :disabled="form.processing"/>
+        <Button @click="submit('Hapus', 'delete')" label="Hapus" :disabled="form.processing" severity="danger" v-if="props.data"/>
     </form>
 </template>
 
