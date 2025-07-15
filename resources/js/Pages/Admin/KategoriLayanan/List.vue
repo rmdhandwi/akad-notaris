@@ -32,7 +32,7 @@ const editData = dataId =>
 <template>
     <div class="flex flex-col">
         <!-- dataTable -->
-        <DataTable :value="dataClone" dataKey="index" class="shadow border border-blue-500 rounded-lg overflow-hidden" showGridlines removable-sort striped-rows scrollable>
+        <DataTable :value="dataClone" dataKey="index" class="shadow border border-blue-500 rounded-lg overflow-hidden" showGridlines removable-sort striped-rows scrollable :filters="filters">
             <template #header>
                 <div class="flex flex-col gap-y-2">
                     <!-- Basic Filter -->
