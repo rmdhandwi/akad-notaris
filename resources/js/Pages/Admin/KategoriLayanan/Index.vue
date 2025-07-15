@@ -4,7 +4,6 @@ import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useConfirm } from 'primevue'
 
 // import store / composables
-import { useNotification } from '@/Composables/useNotification'
 
 // import layout, components
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
@@ -16,8 +15,6 @@ import LoadingSpinner from '@/Components/LoadingSpinner.vue'
 const props = defineProps({
     data : Object
 })
-
-const { showToast } = useNotification()
 
 const pageTitle = ref('Kategori Layanan')
 
