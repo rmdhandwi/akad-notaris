@@ -11,7 +11,8 @@ import { useNotification } from '@/Composables/useNotification'
 
 // variables, functions
 const props = defineProps({
-    data : Object,
+    dataKtg : Object,
+    dataJenis : Object,
 })
 
 const emit = defineEmits(['refreshPage'])
@@ -21,15 +22,16 @@ const confirm = useConfirm()
 const { showToast } = useNotification()
 
 const form = useForm({
+    id_jenis : null,
     id_kategori : null,
-    nama_kategori : null,
-    deskripsi_kategori : null,
+    nama_jenis : null,
+    deskripsi_jenis : null,
 })
 
 const submit = (Action, actionRoute) =>
 {
     confirm.require({
-        message: `${Action} Kategori ${form.nama_kategori ?? ''}?`,
+        message: `${Action} Jenis Layanan ${form.nama_jenis ?? ''}?`,
         header: 'Peringatan',
         icon: 'pi pi-exclamation-triangle',
         rejectProps: {
@@ -42,7 +44,7 @@ const submit = (Action, actionRoute) =>
             severity : actionRoute === 'delete' ? 'danger' : 'primary'
         },
         accept: () => {
-            form.post(route(`admin.layanan.kategori.${actionRoute}`), {
+            form.post(route(`admin.layanan.jenis.${actionRoute}`), {
                     onError : () => {
                         showToast(
                             'Terjadi kesalahan',
@@ -61,7 +63,7 @@ const submit = (Action, actionRoute) =>
 }
 
 // reactivity
-watch(() => props.data, (newData) => {
+watch(() => props.dataJenis, (newData) => {
   if (newData) {
     Object.assign(form, newData)
   } else {
@@ -75,24 +77,27 @@ watch(() => props.data, (newData) => {
     <form @submit.prevent class="flex flex-col gap-4 mt-4" autocomplete="off">
         <div>
             <FloatLabel variant="on">
-                <InputText id="nama_kategori" v-model="form.nama_kategori" fluid/>
-                <label for="nama_kategori">Nama Kategori</label>
+                <Select id="nama_jenis" v-model="form.id_kategori" placeholder="Kategori Layanan" :options="props.dataKtg" optionLabel="nama_kategori" optionValue="id_kategori" fluid/>
             </FloatLabel>
-            <span class="text-red-500" v-if="form.errors.nama_kategori"> {{ form.errors.nama_kategori }} </span>
+            <span class="text-red-500" v-if="form.errors.id_kategori"> {{ form.errors.id_kategori }} </span>
+        </div>
+        <div>
+            <FloatLabel variant="on">
+                <InputText id="nama_jenis" v-model="form.nama_jenis" fluid/>
+                <label for="nama_jenis">Nama Jenis</label>
+            </FloatLabel>
+            <span class="text-red-500" v-if="form.errors.nama_jenis"> {{ form.errors.nama_jenis }} </span>
         </div>
 
         <div>
             <FloatLabel variant="on">
-                <Textarea id="deskripsi_kategori" v-model="form.deskripsi_kategori" autoResize fluid/>
-                <label for="deskripsi_kategori">Deskripsi Kategori</label>
+                <Textarea id="deskripsi_jenis" v-model="form.deskripsi_jenis" autoResize fluid/>
+                <label for="deskripsi_jenis">Deskripsi Jenis</label>
             </FloatLabel>
-            <span class="text-red-500" v-if="form.errors.deskripsi_kategori"> {{ form.errors.deskripsi_kategori }} </span>
+            <span class="text-red-500" v-if="form.errors.deskripsi_jenis"> {{ form.errors.deskripsi_jenis }} </span>
         </div>
 
-        <Button @click="submit(props.data ? 'Update' : 'Simpan', props.data ? 'update' : 'store')" :label="props.data ? 'Update' : 'Simpan'" :disabled="form.processing"/>
-        <Button @click="submit('Hapus', 'delete')" label="Hapus" :disabled="form.processing" severity="danger" v-if="props.data"/>
+        <Button @click="submit(props.dataJenis ? 'Update' : 'Simpan', props.dataJenis ? 'update' : 'store')" :label="props.dataJenis ? 'Update' : 'Simpan'" :disabled="form.processing"/>
+        <Button @click="submit('Hapus', 'delete')" label="Hapus" :disabled="form.processing" severity="danger" v-if="props.dataJenis"/>
     </form>
 </template>
-
-<style scoped>
-</style>
