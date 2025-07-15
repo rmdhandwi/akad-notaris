@@ -11,6 +11,16 @@ class KategoriLayananRepository implements KategoriLayananRepositoryInterface
         $store = KategoriLayanan::create($data);
         return (bool) $store;
     }
-    public function update($id, array $data) {}
-    public function delete($id) {}
+
+    public function update($id, array $data) {
+        $getData = KategoriLayanan::findOrFail($id);
+
+        return $getData->update($data);
+    }
+
+    public function delete($id) {
+        $getData = KategoriLayanan::findOrFail($id);
+
+        return $getData->delete();
+    }
 }
