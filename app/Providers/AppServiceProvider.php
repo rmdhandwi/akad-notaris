@@ -29,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\DataBerkasRepositoryInterface::class,
             \App\Repositories\DataBerkasRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\StafDetailRepositoryInterface::class,
+            \App\Repositories\StafDetailRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\NotarisDetailRepositoryInterface::class,
+            \App\Repositories\NotarisDetailRepository::class
+        );
     }
 
     /**
