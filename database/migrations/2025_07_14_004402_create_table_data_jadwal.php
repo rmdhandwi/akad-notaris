@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');
-            $table->text('alasan');
+            $table->text('alasan')->nullable();
             $table->timestamps();
         });
     }
