@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\JenisLayananRepositoryInterface::class,
             \App\Repositories\JenisLayananRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\DataBerkasRepositoryInterface::class,
+            \App\Repositories\DataBerkasRepository::class
+        );
     }
 
     /**
