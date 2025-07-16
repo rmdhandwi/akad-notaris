@@ -14,7 +14,7 @@ class NotarisDetail extends Model
         $primaryKey = 'notaris_id',
         $fillable = [
             'user_id',
-            'nik_notaris',
+            'nomor_jabatan_notaris',
             'nama_notaris',
         ];
 
