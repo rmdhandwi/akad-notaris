@@ -28,6 +28,8 @@ class NotarisDetailRequest extends FormRequest
     public function rules(): array
     {
         $notaris_id = $this->input('notaris_details.notaris_id');
+        
+        $user_id = $this->input('user_id');
 
         $isUpdate = !empty($notaris_id);
 
@@ -35,7 +37,13 @@ class NotarisDetailRequest extends FormRequest
             'user_id' => $isUpdate ? ['required', 'exists:users,user_id'] : ['nullable'],
             'notaris_details.notaris_id' => $isUpdate ? ['required', 'exists:notaris_details,notaris_id'] : ['nullable'],
             'username' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => [
+                'required',
+                'email:rfc',
+                $isUpdate ?
+                    Rule::unique('users', 'email')->ignore($user_id, 'user_id') :
+                    Rule::unique('users', 'email'),
+            ],
             'password' => [],
             'notaris_details.nomor_jabatan_notaris' => [
                 'required',
