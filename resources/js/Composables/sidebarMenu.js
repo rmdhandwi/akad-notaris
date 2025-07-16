@@ -4,5 +4,5 @@ export const adminMenu = [
     { label: "Jenis Layanan", icon: "pi pi-briefcase", route: "admin.layanan.jenis.index"},
     { label: "Data Berkas", icon: "pi pi-book", route: "admin.berkas.index"},
     { label: "Data Staf", icon: "pi pi-user", route: "admin.users.staf.index"},
-    { label: "Data Notaris", icon: "pi pi-user", route: "admin.notaris.index"},
+    { label: "Data Notaris", icon: "pi pi-user", route: "admin.users.notaris.index"},
 ]
