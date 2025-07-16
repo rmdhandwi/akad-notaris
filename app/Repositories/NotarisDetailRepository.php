@@ -78,12 +78,6 @@ class NotarisDetailRepository implements NotarisDetailRepositoryInterface
     {
         $getUser = User::findOrFail($id);
 
-        $getStaf = NotarisDetail::where('user_id', $getUser->user_id);
-
-        if ($getUser->delete() && $getStaf->delete()) {
-            return true;
-        }
-
-        return false;
+        return $getUser->delete();
     }
 }
