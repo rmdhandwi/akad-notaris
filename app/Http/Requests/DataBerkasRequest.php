@@ -27,7 +27,7 @@ class DataBerkasRequest extends FormRequest
         $isUpdate = !empty($id_berkas);
 
         return [
-            'id_jenis' => $isUpdate ? ['required', 'exists:jenis_layanan,id_jenis'] : 'nullable',
+            'id_jenis' => ['required', 'exists:jenis_layanan,id_jenis'],
             'nama_berkas' => [
                 'required',
                 'string',
@@ -43,7 +43,7 @@ class DataBerkasRequest extends FormRequest
         return [
             '*.required' => ':attribute wajib diisi.',
             '*.unique'   => ':attribute sudah terdaftar.',
-            '*.exist'   => ':attribute tidak terdaftar.',
+            '*.exists'   => ':attribute tidak terdaftar.',
         ];
     }
 }
