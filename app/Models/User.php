@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
+
+    public function stafDetails()
+    {
+        return $this->hasOne(StafDetail::class, 'user_id', 'user_id');
+    }
+
+    public function notarisDetails()
+    {
+        return $this->hasOne(NotarisDetail::class, 'user_id', 'user_id');
+    }
 }
