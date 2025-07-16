@@ -28,6 +28,7 @@ class StafDetailRequest extends FormRequest
     public function rules(): array
     {
         $staf_id = $this->input('staf_details.staf_id');
+        $user_id = $this->input('user_id');
 
         $isUpdate = !empty($staf_id);
 
@@ -35,7 +36,13 @@ class StafDetailRequest extends FormRequest
             'user_id' => $isUpdate ? ['required', 'exists:users,user_id'] : ['nullable'],
             'staf_details.staf_id' => $isUpdate ? ['required', 'exists:staf_details,staf_id'] : ['nullable'],
             'username' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => [
+                'required',
+                'email:rfc',
+                $isUpdate ?
+                Rule::unique('users', 'email')->ignore($user_id, 'user_id') :
+                Rule::unique('users', 'email'),
+            ],
             'password' => [],
             'staf_details.nik_staf' => [
                 'required',
