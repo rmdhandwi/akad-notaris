@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DataBerkasController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,9 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::post('/admin/layanan/jenis/store', [JenisLayananController::class, 'store'])->name('admin.layanan.jenis.store');
     Route::post('/admin/layanan/jenis/update', [JenisLayananController::class, 'update'])->name('admin.layanan.jenis.update');
     Route::post('/admin/layanan/jenis/delete', [JenisLayananController::class, 'delete'])->name('admin.layanan.jenis.delete');
+
+    Route::get('/admin/berkas', [DataBerkasController::class, 'index'])->name('admin.berkas.index');
+    Route::post('/admin/berkas/store', [DataBerkasController::class, 'store'])->name('admin.berkas.store');
+    Route::post('/admin/berkas/update', [DataBerkasController::class, 'update'])->name('admin.berkas.update');
+    Route::post('/admin/berkas/delete', [DataBerkasController::class, 'delete'])->name('admin.berkas.delete');
 });
