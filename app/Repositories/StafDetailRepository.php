@@ -78,13 +78,6 @@ class StafDetailRepository implements StafDetailRepositoryInterface
     {
         $getUser = User::findOrFail($id);
 
-        $getStaf = StafDetail::where('user_id', $getUser->user_id);
-
-        if($getUser->delete() && $getStaf->delete())
-        {
-            return true;
-        }
-
-        return false;
+        return $getUser->delete();
     }
 }
