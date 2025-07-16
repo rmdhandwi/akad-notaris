@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class berkasLayananRequest extends FormRequest
+class DataBerkasRequest extends FormRequest
 {
     public function authorize(): bool
     {
