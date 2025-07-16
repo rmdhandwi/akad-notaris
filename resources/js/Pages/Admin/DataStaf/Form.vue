@@ -48,7 +48,7 @@ const submit = (Action, actionRoute) =>
             severity : actionRoute === 'delete' ? 'danger' : 'primary'
         },
         accept: () => {
-            form.post(route(`admin.users.staf_details.${actionRoute}`), {
+            form.post(route(`admin.users.staf.${actionRoute}`), {
                     onError : () => {
                         showToast(
                             'Terjadi kesalahan',
@@ -138,7 +138,7 @@ watch(() => props.dataStaf, (newData) => {
                 <Password id="staf_password" :defaultValue="null" v-model="form.password" toggleMask fluid/>
                 <label for="staf_password">Password</label>
             </FloatLabel>
-            <span class="text-sm text-red-500 mx-2" v-if="form.errors.password">
+            <span class="text-red-500" v-if="form.errors.password">
                 {{ form.errors.password }}
             </span>
         </div>
