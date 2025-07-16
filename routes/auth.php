@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DataBerkasController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
+use App\Http\Controllers\StafDetailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -38,4 +39,9 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::post('/admin/berkas/store', [DataBerkasController::class, 'store'])->name('admin.berkas.store');
     Route::post('/admin/berkas/update', [DataBerkasController::class, 'update'])->name('admin.berkas.update');
     Route::post('/admin/berkas/delete', [DataBerkasController::class, 'delete'])->name('admin.berkas.delete');
+
+    Route::get('/admin/users/staf', [StafDetailController::class, 'index'])->name('admin.users.staf.index');
+    Route::post('/admin/users/staf/store', [StafDetailController::class, 'store'])->name('admin.users.staf.store');
+    Route::post('/admin/users/staf/update', [StafDetailController::class, 'update'])->name('admin.users.staf.update');
+    Route::post('/admin/users/staf/delete', [StafDetailController::class, 'delete'])->name('admin.users.staf.delete');
 });
