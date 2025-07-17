@@ -16,6 +16,7 @@ class DataJadwalRequest extends FormRequest
     protected function prepareForValidation()
     {
         $user = auth()->user();
+
         if($this->tanggal)
         {
             $this->merge([
