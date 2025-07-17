@@ -15,9 +15,14 @@ class DataJadwalRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'tanggal' => Carbon::parse($this->tanggal)->timezone('Asia/Jayapura')->format('Y-m-d'),
-        ]);
+        $user = auth()->user();
+        if($this->tanggal)
+        {
+            $this->merge([
+                'notaris_id' => $user->notarisDetails?->notaris_id,
+                'tanggal' => Carbon::parse($this->tanggal)->timezone('Asia/Jayapura')->format('Y-m-d'),
+            ]);
+        }
     }
 
     public function attributes(): array
@@ -34,6 +39,7 @@ class DataJadwalRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'notaris_id' => ['required', 'exists:notaris_details,notaris_id'],
             'tanggal' => [
                 'required',
                 'date',
@@ -58,6 +64,7 @@ class DataJadwalRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'notaris_id.required' => 'Harap lengkapi data anda sebelum membuat jadwal',
             '*.required' => ':attribute wajib diisi.',
             '*.date'   => ':attribute harus format tanggal.',
             '*.date_format'   => ':attribute harus format :date_format.',
