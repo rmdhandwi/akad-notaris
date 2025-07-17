@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DataBerkasController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
+use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\NotarisDetailController;
 use App\Http\Controllers\StafDetailController;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,8 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::post('/admin/users/notaris/store', [NotarisDetailController::class, 'store'])->name('admin.users.notaris.store');
     Route::post('/admin/users/notaris/update', [NotarisDetailController::class, 'update'])->name('admin.users.notaris.update');
     Route::post('/admin/users/notaris/delete', [NotarisDetailController::class, 'delete'])->name('admin.users.notaris.delete');
+});
+
+Route::middleware(['auth', 'roleName:notaris'])->group(function () {
+    Route::get('notaris/dashboard', [NotarisController::class, 'dashboard'])->name('notaris.dashboard');
 });
