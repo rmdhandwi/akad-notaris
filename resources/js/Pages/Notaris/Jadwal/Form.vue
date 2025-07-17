@@ -40,6 +40,14 @@ const form = useForm({
     alasan : null,
 })
 
+function formatTime(date) {
+    return date.toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+    });
+}
+
 const submit = (Action, actionRoute) =>
 {
     confirm.require({
@@ -56,6 +64,11 @@ const submit = (Action, actionRoute) =>
             severity : actionRoute === 'delete' ? 'danger' : 'primary'
         },
         accept: () => {
+            form.transform((data) => ({
+                ...data,
+                waktu_mulai: data.waktu_mulai ? formatTime(data.waktu_mulai) : null,
+                waktu_selesai: data.waktu_selesai ? formatTime(data.waktu_selesai) : null,
+            }));
             form.post(route(`notaris.layanan.jadwal.${actionRoute}`), {
                     onError : () => {
                         showToast(
