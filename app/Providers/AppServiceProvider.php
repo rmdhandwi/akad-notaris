@@ -37,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\NotarisDetailRepositoryInterface::class,
             \App\Repositories\NotarisDetailRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\DataJadwalRepositoryInterface::class,
+            \App\Repositories\DataJadwalRepository::class
+        );
     }
 
     /**
