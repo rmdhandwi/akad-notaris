@@ -3,11 +3,16 @@
 import { onBeforeMount, ref } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api'
 
+// import store / composables
+import { useFormatTanggal } from '@/Composables/useFormatTanggal'
 
 // lifecycle hooks
 onBeforeMount(() =>
 {
-    dataJadwalClone.value = props.dataJadwal
+    dataJadwalClone.value = props.dataJadwal.map(item => ({
+        ...item,
+        tanggal : formatToDMY(item.tanggal)
+    }))
 })
 
 // variables, functions
@@ -22,6 +27,8 @@ const filters = ref({
 })
 
 const dataJadwalClone = ref([])
+
+const { formatToDMY } = useFormatTanggal()
 
 const editData = dataId =>
 {
