@@ -69,7 +69,7 @@ const editData = dataId =>
             <Column header="Action" frozen align-frozen="right" class="w-1 whitespace-nowrap">
                 <template #body="{data}">
                     <div class="flex items-center gap-2">
-                        <Button @click="editData(data.id_berkas)" severity="info" size="small" icon="pi pi-pen-to-square"/>
+                        <Button @click="editData(data.id_jadwal)" severity="info" size="small" icon="pi pi-pen-to-square"/>
                     </div>
                 </template>
             </Column>
