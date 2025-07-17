@@ -2,13 +2,14 @@
 import { computed } from 'vue'
 import { router, usePage } from '@inertiajs/vue3'
 
-import { adminMenu } from '@/Composables/sidebarMenu'
+import { adminMenu, notarisMenu } from '@/Composables/sidebarMenu'
 
 const menus = computed(() =>
 {
     const roleId = usePage().props.auth.user?.role_id
 
     if(roleId === 1) return adminMenu
+    if(roleId === 3) return notarisMenu
 })
 
 </script>
