@@ -32,12 +32,32 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => function () use ($request)
+                {
+                    $user = $request->user();
+
+                    if(!$user)
+                    {
+                        return null;
+                    }
+
+                    if($user->role_id === 2)
+                    {
+                        $user->load('stafDetails');
+                    }
+
+                    if($user->role_id === 3)
+                    {
+                        $user->load('notarisDetails');
+                    }
+
+                    return $user;
+                }
             ],
             'flash' => [
                 'notif_status' => fn () => $request->session()->get('notif_status'), //success / error
                 'notif_message' => fn () => $request->session()->get('notif_message'), //isi notifikasi
-                'notif_duration' => fn () => $request->session()->get('notif_duration'), //isi notifikasi
+                'notif_duration' => fn () => $request->session()->get('notif_duration'), //durasi notifikasi
             ],
         ];
     }
