@@ -10,15 +10,18 @@ class DataJadwal extends Model
     use HasFactory;
 
     protected $table = 'data_jadwal';
-    protected $primaryKey = 'id_berkas';
+    protected $primaryKey = 'id_jadwal';
 
     protected $fillable = [
-        'id_jenis',
-        'nama_berkas',
+        'notaris_id',
+        'tanggal',
+        'waktu_mulai',
+        'waktu_selesai',
+        'alasan',
     ];
 
-    public function jenisLayanan()
+    public function notaris()
     {
-        return $this->belongsTo(JenisLayanan::class, 'id_jenis', 'id_jenis');
+        return $this->belongsTo(NotarisDetail::class, 'notaris_id', 'notaris_id');
     }
 }
