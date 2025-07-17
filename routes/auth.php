@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DataBerkasController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
 use App\Http\Controllers\NotarisController;
@@ -55,4 +56,9 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
 
 Route::middleware(['auth', 'roleName:notaris'])->group(function () {
     Route::get('notaris/dashboard', [NotarisController::class, 'dashboard'])->name('notaris.dashboard');
+
+    Route::get('notaris/layanan/jadwal', [JadwalController::class, 'index'])->name('notaris.layanan.jadwal.index');
+    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'store'])->name('notaris.layanan.jadwal.store');
+    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'update'])->name('notaris.layanan.jadwal.update');
+    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'delete'])->name('notaris.layanan.jadwal.delete');
 });
