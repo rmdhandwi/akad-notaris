@@ -33,6 +33,7 @@ maxWaktuSelesai.value.setHours(16, 0, 0); // jam 16:00:00
 
 const form = useForm({
     id_jadwal : null,
+    notaris_id : null,
     tanggal : null,
     waktu_mulai : null,
     waktu_selesai : null,
@@ -42,7 +43,7 @@ const form = useForm({
 const submit = (Action, actionRoute) =>
 {
     confirm.require({
-        message: `${Action} Berkas ${form.nama_berkas ?? ''}?`,
+        message: `${Action} Jadwal ?`,
         header: 'Peringatan',
         icon: 'pi pi-exclamation-triangle',
         rejectProps: {
@@ -98,6 +99,8 @@ watch(() => form.waktu_mulai, (waktuMulai) =>
 <template>
     <form @submit.prevent class="flex flex-col gap-4 mt-4" autocomplete="off">
 
+        <span class="text-red-500" v-if="form.errors.notaris_id"> {{ form.errors.notaris_id }} </span>
+
         <div>
             <FloatLabel variant="on">
                 <DatePicker v-model="form.tanggal" inputId="on_label" :minDate="minDate" showIcon iconDisplay="input" dateFormat="dd-mm-yy" fluid/>
@@ -108,7 +111,7 @@ watch(() => form.waktu_mulai, (waktuMulai) =>
 
         <div>
             <FloatLabel variant="on">
-                <DatePicker v-model="form.waktu_mulai" inputId="on_label" showIcon :stepMinute="30" :defaultValue="minTime" :minDate="minTime" :maxDate="maxTime" icon="pi pi-clock" iconDisplay="input" timeOnly fluid/>
+                <DatePicker v-model="form.waktu_mulai" inputId="on_label" showIcon :stepMinute="30" :minDate="minTime" :maxDate="maxTime" icon="pi pi-clock" iconDisplay="input" timeOnly fluid/>
                 <label for="on_label">Waktu mulai</label>
             </FloatLabel>
             <span class="text-red-500" v-if="form.errors.waktu_mulai"> {{ form.errors.waktu_mulai }} </span>
