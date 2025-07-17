@@ -58,7 +58,7 @@ Route::middleware(['auth', 'roleName:notaris'])->group(function () {
     Route::get('notaris/dashboard', [NotarisController::class, 'dashboard'])->name('notaris.dashboard');
 
     Route::get('notaris/layanan/jadwal', [JadwalController::class, 'index'])->name('notaris.layanan.jadwal.index');
-    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'store'])->name('notaris.layanan.jadwal.store');
-    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'update'])->name('notaris.layanan.jadwal.update');
-    Route::post('notaris/layanan/jadwal', [JadwalController::class, 'delete'])->name('notaris.layanan.jadwal.delete');
+    Route::post('notaris/layanan/jadwal/store', [JadwalController::class, 'store'])->name('notaris.layanan.jadwal.store');
+    Route::post('notaris/layanan/jadwal/update', [JadwalController::class, 'update'])->name('notaris.layanan.jadwal.update');
+    Route::post('notaris/layanan/jadwal/delete', [JadwalController::class, 'delete'])->name('notaris.layanan.jadwal.delete');
 });
