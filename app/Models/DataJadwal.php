@@ -9,16 +9,19 @@ class DataJadwal extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_jadwal';
-    protected $primaryKey = 'id_jadwal';
-
-    protected $fillable = [
-        'notaris_id',
-        'tanggal',
-        'waktu_mulai',
-        'waktu_selesai',
-        'alasan',
-    ];
+    protected
+        $table = 'data_jadwal',
+        $primaryKey = 'id_jadwal',
+        $fillable = [
+            'notaris_id',
+            'tanggal',
+            'waktu_mulai',
+            'waktu_selesai',
+            'alasan',
+        ],
+        $casts = [
+            'tanggal' => 'string',
+        ];
 
     public function notaris()
     {
