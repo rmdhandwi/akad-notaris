@@ -13,11 +13,12 @@ class KategoriPihak extends Model
         $table = 'kategori_pihak',
         $primaryKey = 'id_kategori_pihak',
         $fillable = [
+            'id_jenis',
             'nama_kategori_pihak',
         ];
 
-    public function dataBerkas()
-    {
-        return $this->belongsTo(DataBerkas::class, 'id_kategori_pihak', 'id_kategori_pihak');
-    }
+        public function jenisLayanan()
+        {
+            return $this->BelongsTo(JenisLayanan::class, 'id_jenis' ,'id_jenis');
+        }
 }
