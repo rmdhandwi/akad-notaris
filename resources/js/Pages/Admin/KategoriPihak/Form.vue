@@ -11,6 +11,7 @@ import { useNotification } from '@/Composables/useNotification'
 
 // variables, functions
 const props = defineProps({
+    dataJenis : Object,
     dataKtgPihak : Object,
 })
 
@@ -22,6 +23,7 @@ const { showToast } = useNotification()
 
 const form = useForm({
     id_kategori_pihak : null,
+    id_jenis : null,
     nama_kategori_pihak : null,
 })
 
@@ -73,6 +75,13 @@ watch(() => props.dataKtgPihak, (newData) => {
 
 <template>
     <form @submit.prevent class="flex flex-col gap-4 mt-4" autocomplete="off">
+
+        <div>
+            <FloatLabel variant="on">
+                <Select id="id_jenis" v-model="form.id_jenis" placeholder="Jenis layanan" :options="props.dataJenis" optionLabel="nama_jenis" optionValue="id_jenis"  fluid/>
+            </FloatLabel>
+            <span class="text-red-500" v-if="form.errors.id_jenis"> {{ form.errors.id_jenis }} </span>
+        </div>
 
         <div>
             <FloatLabel variant="on">
