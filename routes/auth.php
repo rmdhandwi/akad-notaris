@@ -72,4 +72,5 @@ Route::middleware(['auth', 'roleName:notaris'])->group(function () {
 
 Route::middleware(['auth', 'roleName:klien'])->group(function () {
     Route::get('klien/dashboard', [KlienController::class, 'dashboard'])->name('klien.dashboard');
+    Route::get('klien/layanan/jadwal', [KlienController::class, 'indexJadwal'])->name('klien.layanan.jadwal.index');
 });
