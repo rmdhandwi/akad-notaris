@@ -27,6 +27,10 @@ return new class extends Migration
         });
         Schema::create('berkas_pihak', function (Blueprint $table) {
             $table->id('id_berkas_pihak');
+            $table->foreignId('id_permintaan')
+                ->nullable() // bisa disesuaikan, nullable jika data sebelumnya belum memiliki relasi
+                ->constrained('permintaan_layanan', 'id_permintaan')
+                ->cascadeOnDelete();
             $table->foreignId('id_berkas')->constrained('data_berkas', 'id_berkas')->cascadeOnDelete();
             $table->foreignId('id_pihak')->constrained('data_pihak', 'id_pihak')->cascadeOnDelete();
             $table->string('berkas_path')->nullable();
@@ -50,5 +54,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('data_pihak');
+        Schema::dropIfExists('berkas_pihak');
+        Schema::dropIfExists('permintaan_layanan');
     }
 };
