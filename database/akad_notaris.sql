@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3000
--- Generation Time: Jul 16, 2025 at 12:55 PM
+-- Generation Time: Jul 18, 2025 at 12:03 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -64,8 +64,13 @@ CREATE TABLE `data_berkas` (
 --
 
 INSERT INTO `data_berkas` (`id_berkas`, `id_jenis`, `nama_berkas`, `created_at`, `updated_at`) VALUES
-(1, 1, 'KTP Pemilik Sertifikat', '2025-07-16 11:02:24', '2025-07-16 11:02:24'),
-(2, 1, 'Sertifikat', '2025-07-16 11:06:40', '2025-07-16 11:06:40');
+(6, 2, 'KTP Pemilik Sertifikat', '2025-07-16 13:59:38', '2025-07-16 13:59:38'),
+(7, 2, 'Sertifikat', '2025-07-17 16:12:33', '2025-07-17 16:12:33'),
+(8, 2, 'SKMHT', '2025-07-17 16:12:49', '2025-07-17 16:12:49'),
+(9, 2, 'PBB', '2025-07-17 16:13:02', '2025-07-17 16:13:02'),
+(10, 2, 'Surat Kuasa dari Bank', '2025-07-17 16:13:21', '2025-07-17 16:13:21'),
+(11, 2, 'KTP Pimpinan Bank', '2025-07-17 16:14:18', '2025-07-17 16:14:18'),
+(12, 2, 'SK Pejabat Bank', '2025-07-17 16:14:28', '2025-07-17 16:14:28');
 
 -- --------------------------------------------------------
 
@@ -79,10 +84,21 @@ CREATE TABLE `data_jadwal` (
   `tanggal` date NOT NULL,
   `waktu_mulai` time NOT NULL,
   `waktu_selesai` time NOT NULL,
-  `alasan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alasan` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `data_jadwal`
+--
+
+INSERT INTO `data_jadwal` (`id_jadwal`, `notaris_id`, `tanggal`, `waktu_mulai`, `waktu_selesai`, `alasan`, `created_at`, `updated_at`) VALUES
+(8, 1, '2025-07-17', '14:30:00', '15:00:00', NULL, '2025-07-17 13:50:35', '2025-07-17 13:50:35'),
+(9, 1, '2025-07-18', '13:30:00', '14:00:00', NULL, '2025-07-17 13:51:20', '2025-07-17 13:51:20'),
+(10, 1, '2025-07-19', '09:00:00', '16:00:00', 'Libur', '2025-07-17 16:10:00', '2025-07-17 16:10:00'),
+(11, 1, '2025-07-21', '13:00:00', '13:30:00', NULL, '2025-07-17 16:16:04', '2025-07-17 16:16:04'),
+(12, 1, '2025-07-22', '10:30:00', '11:00:00', NULL, '2025-07-17 16:16:31', '2025-07-17 16:16:31');
 
 -- --------------------------------------------------------
 
@@ -104,7 +120,7 @@ CREATE TABLE `jenis_layanan` (
 --
 
 INSERT INTO `jenis_layanan` (`id_jenis`, `id_kategori`, `nama_jenis`, `deskripsi_jenis`, `created_at`, `updated_at`) VALUES
-(1, 1, 'APHT (Akta Pemberian Hak Tanggungan)', 'tes', '2025-07-15 13:41:01', '2025-07-15 14:06:46');
+(2, 1, 'APHT (Akta Pemberian Hak Tanggungan)', NULL, '2025-07-16 13:59:15', '2025-07-16 13:59:15');
 
 -- --------------------------------------------------------
 
@@ -166,6 +182,13 @@ CREATE TABLE `notaris_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `notaris_details`
+--
+
+INSERT INTO `notaris_details` (`notaris_id`, `user_id`, `nomor_jabatan_notaris`, `nama_notaris`, `created_at`, `updated_at`) VALUES
+(1, 3, '127301273', 'John', '2025-07-17 11:37:09', '2025-07-17 11:37:09');
+
 -- --------------------------------------------------------
 
 --
@@ -204,6 +227,14 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('GGOnwi1QgDANTygdinCsE9pdQG5hVLh65fp14Xoj', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieGxsRWpFWDlPMXgwMlJvY3hZa3QxNWxzNHdmUEVISVp1Zzd2Z05acyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9ha2FkLW5vdGFyaXMudGVzdDo2NjYiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1752839359),
+('rKMALIKSgMsbKjllVfO3FdhCVfIngeYGkcmiOsTb', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUGF5bktBRmFlUTdwbnpoREVRWGZHTWNJRGtrR2hTUVdKRFA5ZElLdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9ha2FkLW5vdGFyaXMudGVzdDo2NjYvbm90YXJpcy9sYXlhbmFuL2phZHdhbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1752771024);
+
 -- --------------------------------------------------------
 
 --
@@ -224,8 +255,7 @@ CREATE TABLE `staf_details` (
 --
 
 INSERT INTO `staf_details` (`staf_id`, `user_id`, `nik_staf`, `nama_staf`, `created_at`, `updated_at`) VALUES
-(2, 2, '162730', 'Cole P', '2025-07-16 13:33:03', '2025-07-16 13:33:39'),
-(3, NULL, '23103720', 'Rizki', '2025-07-16 13:37:04', '2025-07-16 13:37:04');
+(4, 2, '13296329', 'Cole palmer', '2025-07-16 14:00:00', '2025-07-16 14:00:00');
 
 -- --------------------------------------------------------
 
@@ -351,19 +381,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `data_berkas`
 --
 ALTER TABLE `data_berkas`
-  MODIFY `id_berkas` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_berkas` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `data_jadwal`
 --
 ALTER TABLE `data_jadwal`
-  MODIFY `id_jadwal` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jadwal` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jenis_layanan`
 --
 ALTER TABLE `jenis_layanan`
-  MODIFY `id_jenis` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jenis` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kategori_layanan`
@@ -381,7 +411,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notaris_details`
 --
 ALTER TABLE `notaris_details`
-  MODIFY `notaris_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `notaris_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -393,13 +423,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `staf_details`
 --
 ALTER TABLE `staf_details`
-  MODIFY `staf_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `staf_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
