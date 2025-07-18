@@ -34,8 +34,8 @@ class KategoriPihakRequest extends FormRequest
                 'required',
                 'string',
                 $isUpdate ?
-                    Rule::unique('kategori_pihak', 'nama_kategori')->ignore($id_kategori_pihak, 'id_kategori_pihak') :
-                    Rule::unique('kategori_pihak', 'nama_kategori'),
+                    Rule::unique('kategori_pihak', 'nama_kategori_pihak')->ignore($id_kategori_pihak, 'id_kategori_pihak') :
+                    Rule::unique('kategori_pihak', 'nama_kategori_pihak'),
             ],
         ];
     }
