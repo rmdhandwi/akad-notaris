@@ -23,6 +23,11 @@ class JenisLayanan extends Model
         return $this->belongsTo(KategoriLayanan::class, 'id_kategori', 'id_kategori');
     }
 
+    public function kategoriPihak()
+    {
+        return $this->hasMany(KategoriPihak::class, 'id_jenis', 'id_jenis');
+    }
+
     public function dataBerkas()
     {
         return $this->hasMany(DataBerkas::class, 'id_jenis', 'id_jenis');
