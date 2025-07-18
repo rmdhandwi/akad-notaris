@@ -7,6 +7,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
 use App\Http\Controllers\KategoriPihakController;
+use App\Http\Controllers\KlienController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\NotarisDetailController;
 use App\Http\Controllers\StafDetailController;
