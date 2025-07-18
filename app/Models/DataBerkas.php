@@ -14,11 +14,17 @@ class DataBerkas extends Model
 
     protected $fillable = [
         'id_jenis',
+        'id_kategori_pihak',
         'nama_berkas',
     ];
 
     public function jenisLayanan()
     {
         return $this->belongsTo(JenisLayanan::class, 'id_jenis', 'id_jenis');
+    }
+
+    public function kategoriPihak()
+    {
+        return $this->belongsTo(KategoriPihak::class, 'id_kategori_pihak', 'id_kategori_pihak');
     }
 }
