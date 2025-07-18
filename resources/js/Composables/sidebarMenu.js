@@ -12,3 +12,9 @@ export const notarisMenu = [
     { label: "Dashboard", icon: "pi pi-home", route: "notaris.dashboard" },
     { label: "Jadwal", icon: "pi pi-calendar", route: "notaris.layanan.jadwal.index"},
 ]
+
+export const klienMenu = [
+    { label: "Dashboard", icon: "pi pi-home", route: "klien.dashboard" },
+    { label: "Jadwal", icon: "pi pi-calendar", route: "klien.layanan.jadwal.index"},
+    { label: "Jenis Layanan", icon: "pi pi-briefcase", route: "klien.layanan.jenis.index"},
+]
