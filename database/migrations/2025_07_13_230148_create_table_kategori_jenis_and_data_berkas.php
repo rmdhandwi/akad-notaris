@@ -33,6 +33,7 @@ return new class extends Migration
         Schema::create('data_berkas', function (Blueprint $table) {
             $table->id('id_berkas');
             $table->foreignId('id_jenis')->nullable()->constrained('jenis_layanan','id_jenis')->nullOnDelete();
+            $table->foreignId('id_kategori_pihak')->nullable()->constrained('kategori_pihak','id_kategori_pihak')->nullOnDelete();
             $table->string('nama_berkas');
             $table->timestamps();
         });
