@@ -39,7 +39,7 @@ class StafDetailRequest extends FormRequest
             'email' => [
                 'required',
                 'email:rfc',
-                $isUpdate ?
+                $user_id ?
                 Rule::unique('users', 'email')->ignore($user_id, 'user_id') :
                 Rule::unique('users', 'email'),
             ],
