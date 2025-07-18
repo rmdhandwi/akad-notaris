@@ -16,5 +16,5 @@ export const notarisMenu = [
 export const klienMenu = [
     { label: "Dashboard", icon: "pi pi-home", route: "klien.dashboard" },
     { label: "Cek Jadwal", icon: "pi pi-calendar", route: "klien.layanan.jadwal.index"},
-    { label: "Jenis Layanan", icon: "pi pi-briefcase", route: "klien.layanan.jenis.index"},
+    { label: "Jenis Layanan", icon: "pi pi-briefcase", route: "klien.layanan.syarat.index"},
 ]
