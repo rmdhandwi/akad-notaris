@@ -6,6 +6,7 @@ use App\Http\Controllers\DataBerkasController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JenisLayananController;
 use App\Http\Controllers\KategoriLayananController;
+use App\Http\Controllers\KategoriPihakController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\NotarisDetailController;
 use App\Http\Controllers\StafDetailController;
@@ -37,6 +38,11 @@ Route::middleware(['auth', 'roleName:admin'])->group(function () {
     Route::post('/admin/layanan/jenis/store', [JenisLayananController::class, 'store'])->name('admin.layanan.jenis.store');
     Route::post('/admin/layanan/jenis/update', [JenisLayananController::class, 'update'])->name('admin.layanan.jenis.update');
     Route::post('/admin/layanan/jenis/delete', [JenisLayananController::class, 'delete'])->name('admin.layanan.jenis.delete');
+
+    Route::get('/admin/layanan/kategori_pihak', [KategoriPihakController::class, 'index'])->name('admin.layanan.pihak.index');
+    Route::post('/admin/layanan/kategori_pihak/store', [KategoriPihakController::class, 'store'])->name('admin.layanan.pihak.store');
+    Route::post('/admin/layanan/kategori_pihak/update', [KategoriPihakController::class, 'update'])->name('admin.layanan.pihak.update');
+    Route::post('/admin/layanan/kategori_pihak/delete', [KategoriPihakController::class, 'delete'])->name('admin.layanan.pihak.delete');
 
     Route::get('/admin/berkas', [DataBerkasController::class, 'index'])->name('admin.berkas.index');
     Route::post('/admin/berkas/store', [DataBerkasController::class, 'store'])->name('admin.berkas.store');
