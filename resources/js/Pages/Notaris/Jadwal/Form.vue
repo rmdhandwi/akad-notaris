@@ -66,8 +66,8 @@ const submit = (Action, actionRoute) =>
         accept: () => {
             form.transform((data) => ({
                 ...data,
-                waktu_mulai: data.waktu_mulai ? formatTime(data.waktu_mulai) : null,
-                waktu_selesai: data.waktu_selesai ? formatTime(data.waktu_selesai) : null,
+                waktu_mulai: typeof data.waktu_mulai === 'object' ? formatTime(data.waktu_mulai) : data.waktu_mulai,
+                waktu_selesai: typeof data.waktu_selesai === 'object' ? formatTime(data.waktu_selesai) : data.waktu_selesai,
             }));
             form.post(route(`notaris.layanan.jadwal.${actionRoute}`), {
                     onError : () => {
