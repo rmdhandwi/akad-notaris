@@ -28,7 +28,7 @@ const form = useForm({
 const submit = (Action, actionRoute) =>
 {
     confirm.require({
-        message: `${Action} Staf ${form.nama_kategori_pihak ?? ''}?`,
+        message: `${Action} Kategori pihak ${form.nama_kategori_pihak ?? ''}?`,
         header: 'Peringatan',
         icon: 'pi pi-exclamation-triangle',
         rejectProps: {
