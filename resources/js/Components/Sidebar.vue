@@ -5,7 +5,7 @@ import { router, usePage } from '@inertiajs/vue3'
 import { useConfirm } from 'primevue'
 
 // import store / composables
-import { adminMenu, notarisMenu } from '@/Composables/sidebarMenu'
+import { adminMenu, notarisMenu, klienMenu } from '@/Composables/sidebarMenu'
 import { useNotification } from '@/Composables/useNotification'
 
 // variables, functions
@@ -19,6 +19,7 @@ const menus = computed(() =>
 
     if(roleId === 1) return adminMenu
     if(roleId === 3) return notarisMenu
+    if(roleId === 4) return klienMenu
 })
 
 const confirmLogout = () =>
