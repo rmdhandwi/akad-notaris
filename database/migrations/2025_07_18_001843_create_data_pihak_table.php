@@ -25,6 +25,15 @@ return new class extends Migration
 
             $table->timestamps();
         });
+        Schema::create('permintaan_layanan', function (Blueprint $table) {
+            $table->id('id_permintaan');
+            $table->foreignId('id_pihak')->constrained('data_pihak', 'id_pihak')->cascadeOnDelete(); // pihak pengaju utama
+            $table->foreignId('id_staf')->nullable()->constrained('users', 'user_id')->nullOnDelete();
+            $table->foreignId('id_jadwal')->nullable()->constrained('data_jadwal', 'id_jadwal')->nullOnDelete();
+            $table->timestamp('tgl_permintaan')->nullable();
+            $table->string('status')->default('pending');
+            $table->timestamps();
+        });
         Schema::create('berkas_pihak', function (Blueprint $table) {
             $table->id('id_berkas_pihak');
             $table->foreignId('id_permintaan')
@@ -35,15 +44,6 @@ return new class extends Migration
             $table->foreignId('id_pihak')->constrained('data_pihak', 'id_pihak')->cascadeOnDelete();
             $table->string('berkas_path')->nullable();
             $table->string('status')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('permintaan_layanan', function (Blueprint $table) {
-            $table->id('id_permintaan');
-            $table->foreignId('id_pihak')->constrained('data_pihak', 'id_pihak')->cascadeOnDelete(); // pihak pengaju utama
-            $table->foreignId('id_staf')->nullable()->constrained('users', 'user_id')->nullOnDelete();
-            $table->foreignId('id_jadwal')->nullable()->constrained('data_jadwal', 'id_jadwal')->nullOnDelete();
-            $table->timestamp('tgl_permintaan')->nullable();
-            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
