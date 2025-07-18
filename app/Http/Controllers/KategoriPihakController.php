@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KategoriPihakRequest;
 use App\Models\KategoriPihak;
 use App\Repositories\Interfaces\KategoriPihakRepositoryInterface;
-use Illuminate\Http\Request;
+use App\Services\RedirectWithNotification;
 use Inertia\Inertia;
 
 class KategoriPihakController extends Controller
@@ -23,5 +24,39 @@ class KategoriPihakController extends Controller
         return Inertia::render('Admin/KategoriPihak/Index', [
             'dataKtgPihak' => $dataKtgPihak,
         ]);
+    }
+
+    public function store(KategoriPihakRequest $req)
+    {
+        $data = $req->validated();
+        $create = $this->repository->create($data);
+        return RedirectWithNotification::back(
+            $create,
+            'Berhasil menambahkan kategori pihak : ' . $req['nama_kategori_pihak'],
+            'Gagal menambahkan kategori pihak : ' . $req['nama_kategori_pihak'],
+        );
+
+    }
+
+    public function update(KategoriPihakRequest $req)
+    {
+        $data = $req->validated();
+        $update = $this->repository->update($data['id_kategori_pihak'], $data);
+        return RedirectWithNotification::back(
+            $update,
+            'Berhasil update kategori pihak : ' . $req['nama_kategori_pihak'],
+            'Gagal update kategori pihak : ' . $req['nama_kategori_pihak'],
+        );
+    }
+
+    public function delete(KategoriPihakRequest $req)
+    {
+        $delete = $this->repository->delete($req['id_kategori_pihak']);
+
+        return RedirectWithNotification::back(
+            $delete,
+            'Berhasil hapus kategori pihak : ' . $req['nama_kategori_pihak'],
+            'Gagal hapus kategori pihak : ' . $req['nama_kategori_pihak'],
+        );
     }
 }
