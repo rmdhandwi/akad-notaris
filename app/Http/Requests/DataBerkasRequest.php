@@ -16,24 +16,19 @@ class DataBerkasRequest extends FormRequest
     {
         return [
             'id_jenis' => 'Jenis layanan',
+            'id_kategori_pihak' => 'Kategori pihak',
             'nama_berkas' => 'Nama berkas',
         ];
     }
 
     public function rules(): array
     {
-        $id_berkas = $this->input('id_berkas');
-
-        $isUpdate = !empty($id_berkas);
-
         return [
             'id_jenis' => ['required', 'exists:jenis_layanan,id_jenis'],
+            'id_kategori_pihak' => ['required', 'exists:kategori_pihak,id_kategori_pihak'],
             'nama_berkas' => [
                 'required',
                 'string',
-                $isUpdate ?
-                    Rule::unique('data_berkas', 'nama_berkas')->ignore($id_berkas, 'id_berkas') :
-                    Rule::unique('data_berkas', 'nama_berkas'),
             ],
         ];
     }
