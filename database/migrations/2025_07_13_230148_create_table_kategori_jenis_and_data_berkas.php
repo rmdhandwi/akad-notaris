@@ -24,9 +24,15 @@ return new class extends Migration
             $table->text('deskripsi_jenis')->nullable();
             $table->timestamps();
         });
+        Schema::create('kategori_pihak', function (Blueprint $table) {
+            $table->id('id_kategori_pihak');
+            $table->string('nama_kategori_pihak');
+            $table->timestamps();
+        });
         Schema::create('data_berkas', function (Blueprint $table) {
             $table->id('id_berkas');
             $table->foreignId('id_jenis')->nullable()->constrained('jenis_layanan','id_jenis')->nullOnDelete();
+            $table->foreignId('id_kategori_pihak')->constrained('kategori_pihak', 'id_kategori_pihak')->cascadeOnDelete();
             $table->string('nama_berkas');
             $table->timestamps();
         });
