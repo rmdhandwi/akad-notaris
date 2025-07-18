@@ -56,7 +56,7 @@ const componentProps = computed(() => {
         case 'Form' :
             if(editDataId.value) {
                 return {
-                    dataKtgPihak : props.dataKtgPihak?.find(data => data.user_id === editDataId.value)
+                    dataKtgPihak : props.dataKtgPihak?.find(data => data.id_kategori_pihak === editDataId.value)
                 }
             }
             else {
