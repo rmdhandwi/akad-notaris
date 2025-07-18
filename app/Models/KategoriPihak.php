@@ -17,8 +17,13 @@ class KategoriPihak extends Model
             'nama_kategori_pihak',
         ];
 
-        public function jenisLayanan()
-        {
-            return $this->BelongsTo(JenisLayanan::class, 'id_jenis' ,'id_jenis');
-        }
+    public function jenisLayanan()
+    {
+        return $this->BelongsTo(JenisLayanan::class, 'id_jenis' ,'id_jenis');
+    }
+
+    public function dataBerkas()
+    {
+        return $this->hasMany(DataBerkas::class, 'id_kategori_pihak', 'id_kategori_pihak');
+    }
 }
