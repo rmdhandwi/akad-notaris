@@ -22,5 +22,5 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
-database/seeders/*.php
+database/seeders/DatabaseSeeder.php
 *.bat
