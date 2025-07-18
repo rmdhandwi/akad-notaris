@@ -57,8 +57,9 @@ const editData = dataId =>
                 <span class="flex justify-center">Tidak Ada Data Berkas</span>
             </template>
             <Column header="No" field="nomor"/>
-            <Column header="Jenis Layanan" field="jenis_layanan.nama_jenis"/>
             <Column header="Berkas" field="nama_berkas"/>
+            <Column header="Jenis Layanan" field="jenis_layanan.nama_jenis"/>
+            <Column header="Kategori Pihak" field="kategori_pihak.nama_kategori_pihak"/>
             <Column header="Action" frozen align-frozen="right" class="w-1 whitespace-nowrap">
                 <template #body="{data}">
                     <div class="flex items-center gap-2">
