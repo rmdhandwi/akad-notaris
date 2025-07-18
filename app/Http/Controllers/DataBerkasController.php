@@ -21,10 +21,13 @@ class DataBerkasController extends Controller
 
     public function index()
     {
-        $dataJenis = JenisLayanan::select('id_jenis', 'nama_jenis')->get();
+        $dataJenis = JenisLayanan::select('id_jenis', 'nama_jenis')->with([
+            'kategoriPihak:id_kategori_pihak,id_jenis,nama_kategori_pihak'
+        ])->get();
 
-        $dataBerkas = DataBerkas::select('id_berkas', 'id_jenis', 'nama_berkas')->with([
-            'jenisLayanan:id_jenis,nama_jenis'
+        $dataBerkas = DataBerkas::select('id_berkas', 'id_jenis', 'id_kategori_pihak', 'nama_berkas')->with([
+            'jenisLayanan:id_jenis,nama_jenis',
+            'kategoriPihak:id_kategori_pihak,nama_kategori_pihak',
         ])->get();
 
         return Inertia::render('Admin/DataBerkas/Index', [
