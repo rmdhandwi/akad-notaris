@@ -13,6 +13,7 @@ import LoadingSpinner from '@/Components/LoadingSpinner.vue'
 
 // variables, functions
 const props = defineProps({
+    dataJenis : Object,
     dataKtgPihak : Object,
 })
 
@@ -50,17 +51,21 @@ const componentProps = computed(() => {
 
         case 'List':
         return {
-            dataKtgPihak : props.dataKtgPihak?.map((p, i) => ({ nomor: i + 1, ...p }))
+            dataKtgPihak : props.dataKtgPihak?.map((p, i) => ({ nomor: i + 1, ...p })),
+            dataJenis : props.dataJenis,
         };
 
         case 'Form' :
             if(editDataId.value) {
                 return {
-                    dataKtgPihak : props.dataKtgPihak?.find(data => data.id_kategori_pihak === editDataId.value)
+                    dataKtgPihak : props.dataKtgPihak?.find(data => data.id_kategori_pihak === editDataId.value),
+                    dataJenis : props.dataJenis,
                 }
             }
             else {
-                return {}
+                return {
+                    dataJenis : props.dataJenis,
+                }
             };
         default:
         return {};
