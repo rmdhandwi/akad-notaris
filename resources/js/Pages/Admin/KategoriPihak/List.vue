@@ -12,7 +12,7 @@ onBeforeMount(() =>
 
 // variables, functions
 const props = defineProps({
-    dataKtgPihak : Object
+    dataKtgPihak : Object,
 })
 
 const emit = defineEmits(['refreshPage', 'editData'])
@@ -56,6 +56,7 @@ const editData = dataId =>
                 <span class="flex justify-center">Tidak Ada Kategori Pihak</span>
             </template>
             <Column header="No" field="nomor"/>
+            <Column header="Jenis Layanan" field="jenis_layanan.nama_jenis"/>
             <Column header="Nama Kategori Pihak" field="nama_kategori_pihak"/>
             <Column header="Action" frozen align-frozen="right" class="w-1 whitespace-nowrap">
                 <template #body="{data}">
