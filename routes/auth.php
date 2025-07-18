@@ -68,3 +68,7 @@ Route::middleware(['auth', 'roleName:notaris'])->group(function () {
     Route::post('notaris/layanan/jadwal/update', [JadwalController::class, 'update'])->name('notaris.layanan.jadwal.update');
     Route::post('notaris/layanan/jadwal/delete', [JadwalController::class, 'delete'])->name('notaris.layanan.jadwal.delete');
 });
+
+Route::middleware(['auth', 'roleName:klien'])->group(function () {
+    Route::get('klien/dashboard', [KlienController::class, 'dashboard'])->name('klien.dashboard');
+});
