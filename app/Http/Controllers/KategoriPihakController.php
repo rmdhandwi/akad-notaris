@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KategoriPihakRequest;
+use App\Models\JenisLayanan;
 use App\Models\KategoriPihak;
 use App\Repositories\Interfaces\KategoriPihakRepositoryInterface;
 use App\Services\RedirectWithNotification;
@@ -20,8 +21,12 @@ class KategoriPihakController extends Controller
 
     public function index()
     {
-        $dataKtgPihak = KategoriPihak::select('id_kategori_pihak', 'nama_kategori_pihak')->get();
+        $dataJenis = JenisLayanan::select('id_jenis', 'nama_jenis')->get();
+        $dataKtgPihak = KategoriPihak::select('id_kategori_pihak','id_jenis', 'nama_kategori_pihak')->with([
+            'jenisLayanan:id_jenis,nama_jenis'
+        ])->get();
         return Inertia::render('Admin/KategoriPihak/Index', [
+            'dataJenis' => $dataJenis,
             'dataKtgPihak' => $dataKtgPihak,
         ]);
     }
