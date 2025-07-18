@@ -25,7 +25,7 @@ class JadwalController extends Controller
 
         $notarisDetails = NotarisDetail::where('user_id', $user->user_id)->first();
 
-        $dataJadwal = DataJadwal::where('notaris_id', $notarisDetails->notaris_id)->get(['id_jadwal','notaris_id','tanggal','waktu_mulai','waktu_selesai']);
+        $dataJadwal = DataJadwal::where('notaris_id', $notarisDetails->notaris_id)->get(['id_jadwal','notaris_id','tanggal','waktu_mulai','waktu_selesai','alasan']);
 
         return Inertia::render('Notaris/Jadwal/Index', [
             'dataJadwal' => $dataJadwal,
