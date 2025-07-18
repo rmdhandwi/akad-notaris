@@ -17,7 +17,7 @@ const props = defineProps({
     dataJenis : Object
 })
 
-const pageTitle = ref('Data Berkas')
+const pageTitle = ref('Daftar Berkas')
 
 const currentTab = ref('List')
 
@@ -63,7 +63,8 @@ const componentProps = computed(() => {
                 }
             }
             else {
-                return { dataJenis : props.dataJenis
+                return {
+                    dataJenis : props.dataJenis
                 }
             };
         default:
