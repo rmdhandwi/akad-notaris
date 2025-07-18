@@ -21,6 +21,8 @@ class DataJadwal extends Model
         ],
         $casts = [
             'tanggal' => 'string',
+            'waktu_mulai' => 'string',
+            'waktu_selesai' => 'string',
         ];
 
     public function notaris()
