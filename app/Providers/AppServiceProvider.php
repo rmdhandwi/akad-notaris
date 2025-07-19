@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,42 +14,22 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // bind each repository and its interface
-        $this->app->bind(
-            \App\Repositories\Interfaces\UserRepositoryInterface::class,
-            \App\Repositories\UserRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\KategoriLayananRepositoryInterface::class,
-            \App\Repositories\KategoriLayananRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\JenisLayananRepositoryInterface::class,
-            \App\Repositories\JenisLayananRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\DataBerkasRepositoryInterface::class,
-            \App\Repositories\DataBerkasRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\StafDetailRepositoryInterface::class,
-            \App\Repositories\StafDetailRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\NotarisDetailRepositoryInterface::class,
-            \App\Repositories\NotarisDetailRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\DataJadwalRepositoryInterface::class,
-            \App\Repositories\DataJadwalRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\KategoriPihakRepositoryInterface::class,
-            \App\Repositories\KategoriPihakRepository::class
-        );
-        $this->app->bind(
-            \App\Repositories\Interfaces\DataPihakRepositoryInterface::class,
-            \App\Repositories\DataPihakRepository::class
-        );
+        $interfacePath = app_path('Repositories/Interfaces');
+
+        foreach (File::allFiles($interfacePath) as $file) {
+            $interfaceName = $file->getFilenameWithoutExtension(); // Misalnya: DataBerkasRepositoryInterface
+            $interfaceClass = "App\\Repositories\\Interfaces\\{$interfaceName}";
+            $repositoryClass = "App\\Repositories\\" . str_replace('Interface', '', $interfaceName);
+
+            if (interface_exists($interfaceClass) && class_exists($repositoryClass)) {
+                $this->app->bind($interfaceClass, $repositoryClass);
+            }
+        }
+        // manual
+        // $this->app->bind(
+        //     \App\Repositories\Interfaces\NamaRepositoryInterface::class,
+        //     \App\Repositories\NamaRepository::class
+        // );
     }
 
     /**
