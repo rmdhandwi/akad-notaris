@@ -11,36 +11,63 @@ import LoadingSpinner from '@/Components/LoadingSpinner.vue'
 // lifecycle hooks
 onMounted(() =>
 {
-    selectedJenis.value = null
+    selectedKategori.value = null
 })
 
 // variables, functions
 const props = defineProps({
-    dataJenisLayanan : Object
+    dataKategoriLayanan : Object
 })
 
 const pageTitle = ref('Daftar Jenis Layanan')
 
 const currentTab = ref('List')
 
-const selectedJenis = ref([])
+const selectedKategori = ref([])
+const selectedJenisLayanan = ref([])
+const selectedJenisLayananProps = ref([])
 
 const switchComponents = (component,title, id_jenis) =>
 {
-    setSelectedJenis(id_jenis)
+    if(id_jenis === null) setSelectedKategori(null)
+    setSelectedJenisLayananProps(id_jenis)
     currentTab.value = component
     pageTitle.value = title
 }
 
-const setSelectedJenis = id_jenis =>
+const setSelectedKategori = id_kategori =>
+{
+    selectedJenisLayananProps.value = null
+
+    if(id_kategori)
+    {
+        const filterData = props.dataKategoriLayanan.find(data => data.id_kategori === id_kategori)
+        selectedKategori.value = filterData
+        setJenisLayanan(filterData.jenis_layanan)
+    }
+
+    else selectedKategori.value = null
+}
+
+const setSelectedJenisLayananProps = id_jenis =>
 {
     if(id_jenis)
     {
-        const filterData = props.dataJenisLayanan.find(data => data.id_jenis === id_jenis)
-        selectedJenis.value = filterData
+        const filterData = selectedJenisLayanan.value.find(data => data.id_jenis === id_jenis)
+        selectedJenisLayananProps.value = filterData
     }
 
-    else selectedJenis.value = null
+    else selectedJenisLayananProps.value = null
+}
+
+const setJenisLayanan = data =>
+{
+    if(data)
+    {
+        selectedJenisLayanan.value = data
+    }
+
+    else selectedJenisLayanan.value = null
 }
 
 // async component
@@ -63,7 +90,7 @@ const componentProps = computed(() => {
 
         case 'List':
         return {
-            dataJenisLayanan : selectedJenis.value,
+            dataJenisLayanan : selectedJenisLayananProps.value,
         };
 
         default:
@@ -79,9 +106,18 @@ const componentProps = computed(() => {
             <div class="flex gap-x-4">
                 <Button @click="switchComponents('List', 'Daftar Jenis Layanan', null)" label="Daftar Jenis Layanan" :severity="currentTab==='List'?'primary':'secondary'" icon="pi pi-list"/>
             </div>
-            <div class="mt-4 flex gap-x-4">
-                <div v-for="jenisLayanan in props.dataJenisLayanan" key="index">
-                    <Button @click="switchComponents('List', jenisLayanan.nama_jenis, jenisLayanan.id_jenis)" :label="jenisLayanan.nama_jenis" :severity="pageTitle===jenisLayanan.nama_jenis?'primary':'secondary'"/>
+            <div class="mt-4 flex flex-col gap-y-4">
+                <div class="flex items-center gap-x-4">
+                    <span>Kategori Layanan : </span>
+                    <div v-for="KategoriLayanan in props.dataKategoriLayanan" key="index">
+                        <Button @click="setSelectedKategori(KategoriLayanan.id_kategori)" :label="KategoriLayanan.nama_kategori" :severity="selectedKategori?.nama_kategori===KategoriLayanan.nama_kategori?'primary':'secondary'"/>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-4" v-if="selectedKategori">
+                    <span>Jenis Layanan : </span>
+                    <div v-for="jenisLayanan in selectedJenisLayanan" key="index">
+                        <Button @click="switchComponents('List', jenisLayanan.nama_jenis, jenisLayanan.id_jenis)" :label="jenisLayanan.nama_jenis" :severity="pageTitle===jenisLayanan.nama_jenis?'primary':'secondary'"/>
+                    </div>
                 </div>
             </div>
             <!-- components -->
