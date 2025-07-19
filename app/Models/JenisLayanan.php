@@ -32,4 +32,9 @@ class JenisLayanan extends Model
     {
         return $this->hasMany(DataBerkas::class, 'id_jenis', 'id_jenis');
     }
+
+    public function permintaanLayanan()
+    {
+        return $this->hasMany(PermintaanLayanan::class, 'id_jenis', 'id_jenis');
+    }
 }
