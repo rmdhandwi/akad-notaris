@@ -73,5 +73,10 @@ Route::middleware(['auth', 'roleName:notaris'])->group(function () {
 Route::middleware(['auth', 'roleName:klien'])->group(function () {
     Route::get('klien/dashboard', [KlienController::class, 'dashboard'])->name('klien.dashboard');
     Route::get('klien/layanan/jadwal', [KlienController::class, 'indexJadwal'])->name('klien.layanan.jadwal.index');
+
     Route::get('klien/layanan/syarat', [KlienController::class, 'indexSyaratJenisLayanan'])->name('klien.layanan.syarat.index');
+
+    Route::post('klien/layanan/syarat', [KlienController::class, 'storeDataPihak'])->name('klien.layanan.data_pihak.store');
+
+    Route::get('klien/layanan/permintaan/form', [KlienController::class, 'redirectToFormBerkasPihak'])->name('klien.layanan.permintaan.form');
 });
