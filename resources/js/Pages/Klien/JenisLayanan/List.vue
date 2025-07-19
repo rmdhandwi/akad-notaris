@@ -8,6 +8,13 @@ const props = defineProps({
     dataJenisLayanan : Object,
 })
 
+const emit = defineEmits(['jenisLayananId'])
+
+const setJenisLayananId = (nama_jenis, id_jenis) =>
+{
+    emit('jenisLayananId', [nama_jenis, id_jenis])
+}
+
 </script>
 
 <template>
@@ -22,6 +29,7 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
+            <Button @click="setJenisLayananId(props.dataJenisLayanan.nama_jenis, props.dataJenisLayanan.id_jenis)" label="Ajukan permintaan layanan"/>
         </div>
         <div v-else>
             <h1 class="text-xl"><i class="pi pi-info-circle"></i> Silahkan pilih jenis layanan untuk melihat persyaratan yang dibutuhkan.</h1>
