@@ -1,6 +1,7 @@
 <script setup>
 // import core api
 import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
+import { useConfirm } from 'primevue'
 
 // import store / composables
 
@@ -21,6 +22,8 @@ const props = defineProps({
 
 const pageTitle = ref('Daftar Jenis Layanan')
 
+const confirm = useConfirm()
+
 const currentTab = ref('List')
 
 const selectedKategori = ref([])
@@ -33,6 +36,11 @@ const switchComponents = (component,title, id_jenis) =>
     setSelectedJenisLayananProps(id_jenis)
     currentTab.value = component
     pageTitle.value = title
+}
+
+const toggleForm = data =>
+{
+    confirmForm(data[0], data[1])
 }
 
 const setSelectedKategori = id_kategori =>
@@ -91,12 +99,62 @@ const componentProps = computed(() => {
         case 'List':
         return {
             dataJenisLayanan : selectedJenisLayananProps.value,
-        };
+        }
+
+        case 'Form' :
+        return {
+            dataJenisLayanan : selectedJenisLayananProps.value?.kategori_pihak.map((p,i) => ({
+                index : i,
+                pihak_ke : i + 1,
+                ...p
+            })),
+        }
 
         default:
         return {};
     }
 })
+
+const confirmForm = (nama_jenis, id_jenis) =>
+{
+    confirm.require({
+        message: `Ajukan permintaan ${nama_jenis} ?`,
+        header: 'Peringatan',
+        icon: 'pi pi-exclamation-triangle',
+        rejectProps: {
+            label: 'Batal',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptProps: {
+            label: `Ajukan`,
+        },
+        accept: () => {
+            switchComponents('Form', nama_jenis, id_jenis)
+        }
+    })
+}
+
+const cancelForm = () =>
+{
+    confirm.require({
+        message: `Kembali ke halaman utama ?`,
+        header: 'Peringatan',
+        icon: 'pi pi-exclamation-triangle',
+        rejectProps: {
+            label: 'Lanjutkan',
+            severity: 'secondary',
+            outlined: true,
+        },
+        acceptProps: {
+            label: `Kembali`,
+            severity: 'danger',
+        },
+        accept: () => {
+            switchComponents('List','Daftar Jenis Layanan', null)
+        }
+    })
+}
 </script>
 
 <template>
@@ -104,9 +162,10 @@ const componentProps = computed(() => {
         <template #pageContent>
             <!-- tabs -->
             <div class="flex gap-x-4">
-                <Button @click="switchComponents('List', 'Daftar Jenis Layanan', null)" label="Daftar Jenis Layanan" :severity="currentTab==='List'?'primary':'secondary'" icon="pi pi-list"/>
+                <Button @click="switchComponents('List', 'Daftar Jenis Layanan', null)" label="Daftar Jenis Layanan" :severity="currentTab==='List'?'primary':'secondary'" icon="pi pi-list" v-if="currentTab==='List'"/>
+                <Button @click="cancelForm()" label="Kembali" severity="secondary" icon="pi pi-arrow-left" v-else/>
             </div>
-            <div class="mt-4 flex flex-col gap-y-4">
+            <div class="mt-4 flex flex-col gap-y-4" v-if="currentTab==='List'">
                 <div class="flex items-center gap-x-4">
                     <span>Kategori Layanan : </span>
                     <div v-for="KategoriLayanan in props.dataKategoriLayanan" key="index">
@@ -122,7 +181,7 @@ const componentProps = computed(() => {
             </div>
             <!-- components -->
             <div class="flex flex-col mt-4">
-                <component :is="currentComponent" v-bind="componentProps"/>
+                <component :is="currentComponent" v-bind="componentProps" @jenisLayananId="toggleForm"/>
             </div>
         </template>
     </AuthenticatedLayout>
