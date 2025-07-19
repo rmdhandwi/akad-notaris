@@ -55,6 +55,7 @@ watch(() => page.props.flash, (newNotification) => {
                     <h1 class="text-[1.3rem] uppercase">
                         {{ props.pageTitle }}
                     </h1>
+                    <span class="text-[1.3rem] uppercase">{{ page.props.auth.user.username }}</span>
                 </div>
                 <!-- #body -->
                 <div class="bg-slate-50 rounded-lg p-4 min-h-screen">
