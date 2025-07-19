@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\KategoriPihakRepositoryInterface::class,
             \App\Repositories\KategoriPihakRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\DataPihakRepositoryInterface::class,
+            \App\Repositories\DataPihakRepository::class
+        );
     }
 
     /**
