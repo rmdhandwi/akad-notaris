@@ -28,7 +28,7 @@ class DataPihakRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_jenis_layanan' => 'required|exists:jenis_layanan,id_jenis',
+            'id_jenis' => 'required|exists:jenis_layanan,id_jenis',
             'pihak' => 'required|array|min:1',
             'pihak.*.user_id' => 'nullable|exists:users,user_id',
             'pihak.*.nama_pihak' => 'required|string|max:255',
@@ -46,8 +46,8 @@ class DataPihakRequest extends FormRequest
             '*.required' => ':attribute wajib diisi.',
             '*.unique'   => ':attribute sudah terdaftar.',
             '*.exists'   => ':attribute tidak terdaftar.',
-            'pihak.*.required' => ':attribute wajib diisi.',
-            'pihak.*.exists'   => ':attribute tidak terdaftar.',
+            'pihak.*.*.required' => ':attribute wajib diisi.',
+            'pihak.*.*.exists'   => ':attribute tidak terdaftar.',
         ];
     }
 }
