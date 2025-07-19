@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataJadwal;
 use App\Models\JenisLayanan;
+use App\Models\KategoriLayanan;
 use Inertia\Inertia;
 
 class KlienController extends Controller
@@ -26,13 +27,14 @@ class KlienController extends Controller
 
     public function indexSyaratJenisLayanan()
     {
-        $dataJenisLayanan = JenisLayanan::select('id_jenis','id_kategori','nama_jenis')->with([
-            'kategoriPihak:id_kategori_pihak,id_jenis,nama_kategori_pihak',
-            'kategoriPihak.dataBerkas:id_berkas,id_kategori_pihak,nama_berkas',
+        $dataKategoriLayanan = KategoriLayanan::select('id_kategori','nama_kategori','deskripsi_kategori')->with([
+            'jenisLayanan:id_jenis,id_kategori,nama_jenis',
+            'jenisLayanan.kategoriPihak:id_kategori_pihak,id_jenis,nama_kategori_pihak',
+            'jenisLayanan.kategoriPihak.dataBerkas:id_berkas,id_kategori_pihak,nama_berkas',
         ])->get();
 
         return Inertia::render('Klien/JenisLayanan/Index', [
-            'dataJenisLayanan' => $dataJenisLayanan,
+            'dataKategoriLayanan' => $dataKategoriLayanan,
         ]);
     }
 }
