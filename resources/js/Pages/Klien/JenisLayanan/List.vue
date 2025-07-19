@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
     <div class="border border-blue-500 rounded-md min-h-fit p-4">
-        <div v-if="props.dataJenisLayanan">
+        <div v-if="props.dataJenisLayanan?.id_jenis">
             <h1 class="text-xl"> <i class="pi pi-info-circle"></i> Syarat Berkas untuk layanan : {{ props.dataJenisLayanan?.nama_jenis }}</h1>
             <div class="flex flex-col gap-y-4 p-2" v-for="kategoriPihak in props.dataJenisLayanan?.kategori_pihak">
                 <div class="flex flex-col">
