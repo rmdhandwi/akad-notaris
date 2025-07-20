@@ -17,4 +17,5 @@ export const klienMenu = [
     { label: "Dashboard", icon: "pi pi-home", route: "klien.dashboard" },
     { label: "Cek Jadwal", icon: "pi pi-calendar", route: "klien.layanan.jadwal.index"},
     { label: "Jenis Layanan", icon: "pi pi-briefcase", route: "klien.layanan.syarat.index"},
+    { label: "Daftar permintaan", icon: "pi pi-book", route: "klien.permintaan.index"},
 ]
