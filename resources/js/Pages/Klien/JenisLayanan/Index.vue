@@ -1,6 +1,6 @@
 <script setup>
 // import core api
-import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
+import { computed, defineAsyncComponent, onMounted, ref, watch } from 'vue'
 import { useConfirm } from 'primevue'
 
 // import store / composables
@@ -25,6 +25,8 @@ const pageTitle = ref('Daftar Jenis Layanan')
 const confirm = useConfirm()
 
 const currentTab = ref('List')
+
+const sidebarDisabled = ref(false)
 
 const selectedKategori = ref([])
 const selectedJenisLayanan = ref([])
@@ -155,10 +157,19 @@ const cancelForm = () =>
         }
     })
 }
+
+watch(() => currentTab.value, (newVal) =>
+{
+    if(newVal === 'Form')
+    {
+        sidebarDisabled.value = true
+    }
+    else sidebarDisabled.value = false
+})
 </script>
 
 <template>
-    <AuthenticatedLayout :pageTitle="pageTitle">
+    <AuthenticatedLayout :pageTitle="pageTitle" :sidebarDisabled="sidebarDisabled">
         <template #pageContent>
             <!-- tabs -->
             <div class="flex gap-x-4">
