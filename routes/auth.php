@@ -78,5 +78,6 @@ Route::middleware(['auth', 'roleName:klien'])->group(function () {
 
     Route::post('klien/layanan/syarat', [KlienController::class, 'storeDataPihak'])->name('klien.layanan.data_pihak.store');
 
+    Route::get('klien/layanan/permintaan/daftar', [KlienController::class, 'daftarPermintaan'])->name('klien.permintaan.index');
     Route::get('klien/layanan/permintaan/form', [KlienController::class, 'redirectToFormBerkasPihak'])->name('klien.layanan.permintaan.form');
 });
