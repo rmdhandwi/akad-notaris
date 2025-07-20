@@ -11,7 +11,6 @@ import LoadingSpinner from '@/Components/LoadingSpinner.vue'
 // lifecycle hooks
 onMounted(() =>
 {
-    console.log(props.dataPermintaan)
 })
 // variables, functions
 const props = defineProps({
