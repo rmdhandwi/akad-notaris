@@ -29,4 +29,9 @@ class DataJadwal extends Model
     {
         return $this->belongsTo(NotarisDetail::class, 'notaris_id', 'notaris_id');
     }
+
+    public function permintaan()
+    {
+        return $this->hasOne(PermintaanLayanan::class, 'id_jadwal','id_jadwal');
+    }
 }
