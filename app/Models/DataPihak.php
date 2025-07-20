@@ -33,6 +33,11 @@ class DataPihak extends Model
         return $this->belongsTo(KategoriPihak::class, 'id_kategori_pihak', 'id_kategori_pihak');
     }
 
+    public function permintaan()
+    {
+        return $this->hasOne(PermintaanLayanan::class, 'id_pihak','id_pihak');
+    }
+
     public function pihakTerkait()
     {
         return $this->belongsTo(DataPihak::class, 'id_pihak_terkait', 'id_pihak_terkait');
