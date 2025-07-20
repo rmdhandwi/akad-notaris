@@ -22,6 +22,7 @@ onMounted(() =>
 // variables, functions
 const props = defineProps({
     pageTitle : String,
+    sidebarDisabled : Boolean,
 })
 
 const page = usePage()
@@ -45,7 +46,7 @@ watch(() => page.props.flash, (newNotification) => {
     <!-- #main layout -->
     <div class="bg-slate-200 flex p-1 min-h-screen overflow-hidden">
         <!-- #sidebar -->
-        <Sidebar/>
+        <Sidebar :sidebarDisabled="props.sidebarDisabled"/>
 
         <div class="w-full h-full px-1 overflow-hidden">
             <!-- #page content -->
