@@ -9,6 +9,9 @@ import { adminMenu, notarisMenu, klienMenu } from '@/Composables/sidebarMenu'
 import { useNotification } from '@/Composables/useNotification'
 
 // variables, functions
+const props = defineProps({
+    sidebarDisabled : Boolean,
+})
 const confirm = useConfirm()
 
 const { showToast } = useNotification()
@@ -54,7 +57,7 @@ const confirmLogout = () =>
 <template>
     <div class="rounded-lg w-[200px] h-[99vh] p-2 flex flex-col bg-gradient-to-b from-blue-500 to-blue-400 gap-[2rem] justify-between fixed">
         <div class="flex flex-col gap-4 text-lg items-center">
-            <Button v-for="menu in menus" :key="menu.route" :label="menu.label" :icon="menu.icon" class="w-full p-1 flex gap-x-2 items-center" :class="{'bg-slate-100 text-sky-500 rounded' : route().current(menu.route),'text-slate-50' : !route().current(menu.route)}" @click="router.visit(route(menu.route))" unstyled/>
+            <Button v-for="menu in menus" :key="menu.route" :label="menu.label" :icon="menu.icon" class="w-full p-1 flex gap-x-2 items-center" :class="{'bg-slate-100 text-sky-500 rounded' : route().current(menu.route),'text-slate-50' : !route().current(menu.route)}" @click="router.visit(route(menu.route))" :disabled="props.sidebarDisabled" unstyled/>
         </div>
         <Button @click="confirmLogout()" class="w-full self-end" severity="danger" label="Logout" icon="pi pi-power-off"/>
     </div>
