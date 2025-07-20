@@ -11,6 +11,7 @@ use App\Http\Controllers\KlienController;
 use App\Http\Controllers\NotarisController;
 use App\Http\Controllers\NotarisDetailController;
 use App\Http\Controllers\StafDetailController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -79,5 +80,10 @@ Route::middleware(['auth', 'roleName:klien'])->group(function () {
     Route::post('klien/layanan/syarat', [KlienController::class, 'storeDataPihak'])->name('klien.layanan.data_pihak.store');
 
     Route::get('klien/layanan/permintaan/daftar', [KlienController::class, 'daftarPermintaan'])->name('klien.permintaan.index');
+    Route::post('klien/layanan/permintaan/simpan-id', function (Request $request) {
+        session(['id_permintaan' => $request->id_permintaan]);
+        // redirect ke halaman form yang butuh id_permintaan
+        return redirect()->route('klien.layanan.permintaan.form');
+    })->name('klien.layanan.permintaan.simpan-id');
     Route::get('klien/layanan/permintaan/form', [KlienController::class, 'redirectToFormBerkasPihak'])->name('klien.layanan.permintaan.form');
 });
