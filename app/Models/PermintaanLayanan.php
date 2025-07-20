@@ -30,4 +30,9 @@ class PermintaanLayanan extends Model
     {
         return $this->belongsTo(JenisLayanan::class, 'id_jenis', 'id_jenis');
     }
+
+    public function jadwal()
+    {
+        return $this->belongsTo(DataJadwal::class, 'id_jadwal', 'id_jadwal');
+    }
 }
