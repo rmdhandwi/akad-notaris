@@ -41,6 +41,7 @@ class DataPihakRepository implements DataPihakRepositoryInterface
             $permintaan = PermintaanLayanan::create([
                 'id_jenis' => $data['id_jenis'],
                 'id_pihak' => $pihak1->id_pihak,
+                'tgl_permintaan' => now(),
             ]);
 
             return $permintaan->id_permintaan;
