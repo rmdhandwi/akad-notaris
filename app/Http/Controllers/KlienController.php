@@ -57,8 +57,8 @@ class KlienController extends Controller
     {
         $user = auth()->user();
 
-        $dataPermintaan = DataPihak::where('user_id', $user->user_id)->select('id_pihak')->with([
-            'permintaan:id_permintaan,id_pihak,id_jenis,tgl_permintaan,status',
+        $dataPermintaan = DataPihak::where('user_id', $user->user_id)->select('id_pihak','user_id')->with([
+            'permintaan:id_permintaan,id_pihak,id_jenis,id_jadwal,tgl_permintaan,status',
             'permintaan.jenisLayanan:id_jenis,nama_jenis',
         ])->get();
 
@@ -85,15 +85,19 @@ class KlienController extends Controller
 
     public function redirectToFormBerkasPihak()
     {
+        $tanggalMulai = Carbon::now()->addDays(2)->toDateString();
+
         $id_permintaan = session('id_permintaan');
 
         $dataPermintaan = PermintaanLayanan::select('id_permintaan','id_jenis','id_pihak','id_jadwal','tgl_permintaan')->with([
+            'pihak:id_pihak,user_id,id_pihak_terkait',
+            'pihak.pihakTerkait:id_pihak,user_id,id_pihak_terkait',
             'jenisLayanan:id_jenis,nama_jenis',
             'jenisLayanan.kategoriPihak:id_kategori_pihak,id_jenis,nama_kategori_pihak',
             'jenisLayanan.kategoriPihak.dataBerkas:id_berkas,id_kategori_pihak,nama_berkas',
         ])->where('id_permintaan', $id_permintaan)->firstOrFail();
 
-        $dataJadwal = DataJadwal::with([
+        $dataJadwal = DataJadwal::where('tanggal', '>=', $tanggalMulai)->with([
             'notaris:notaris_id,nama_notaris'
         ])->doesntHave('permintaan')
         ->select('id_jadwal', 'notaris_id', 'tanggal', 'waktu_mulai', 'waktu_selesai', 'alasan')->get();
