@@ -95,6 +95,7 @@ const uploadBerkas = (id_permintaan) =>
             <Column header="Action" frozen align-frozen="right">
                 <template #body="{data}">
                     <Button @click="uploadBerkas(data.permintaan.id_permintaan)" outlined icon="pi pi-file" label="Upload berkas" size="small" v-if="!data.permintaan.id_jadwal"/>
+                    <Message severity="warn" size="small" v-else>Menunggu validasi staf</Message>
                 </template>
             </Column>
         </DataTable>
