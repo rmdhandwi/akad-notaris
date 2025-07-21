@@ -17,5 +17,6 @@ class BerkasPihak extends Model
         'id_berkas',
         'id_pihak',
         'berkas_path',
+        'status'
     ];
 }
