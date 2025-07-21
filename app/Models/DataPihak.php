@@ -40,6 +40,6 @@ class DataPihak extends Model
 
     public function pihakTerkait()
     {
-        return $this->belongsTo(DataPihak::class, 'id_pihak_terkait', 'id_pihak_terkait');
+        return $this->hasMany(DataPihak::class, 'id_pihak_terkait', 'id_pihak');
     }
 }
