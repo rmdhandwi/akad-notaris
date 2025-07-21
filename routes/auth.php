@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\BerkasPihakController;
 use App\Http\Controllers\DataBerkasController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JenisLayananController;
@@ -86,4 +87,5 @@ Route::middleware(['auth', 'roleName:klien'])->group(function () {
         return redirect()->route('klien.layanan.permintaan.form');
     })->name('klien.layanan.permintaan.simpan-id');
     Route::get('klien/layanan/permintaan/form', [KlienController::class, 'redirectToFormBerkasPihak'])->name('klien.layanan.permintaan.form');
+    Route::post('klien/layanan/permintaan/form', [BerkasPihakController::class, 'store'])->name('klien.layanan.permintaan.form.store');
 });
